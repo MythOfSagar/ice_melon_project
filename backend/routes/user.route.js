@@ -2,6 +2,7 @@ const { Router } = require("express");
 const { UserModel } = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+
 require("dotenv").config();
 
 const userRouter = Router();
@@ -10,9 +11,9 @@ userRouter.post("/signIn", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    bcrypt.hash(password, process.env.SaltRounds, async (err, hash) => {
+    bcrypt.hash(password, +(process.env.SaltRounds), async (err, hash) => {
       if (err) {
-        res.send("Error Occurred, Please try again");
+        res.send("Error Occurred, Please try again Later");
       } else {
         const newUser = new UserModel({ email, password: hash });
         await newUser.save();
@@ -23,6 +24,8 @@ userRouter.post("/signIn", async (req, res) => {
     res.send("Error Occurred, Please try again");
   }
 });
+
+
 
 
 

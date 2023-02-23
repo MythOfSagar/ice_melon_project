@@ -1,12 +1,14 @@
 const express = require("express");
 const { connection } = require("./config/db");
 const { userRouter } = require("./routes/user.route");
+const {blogRouter} = require("./routes/blog.route");
 
 const app = express();
 
 app.use(express.json());
 
 app.use("/users", userRouter);
+app.use("/blogs", blogRouter);
 
 app.get("/", (req, res) => {
   res.send("ice_melon_Home");
