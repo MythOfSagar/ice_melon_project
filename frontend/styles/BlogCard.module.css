@@ -1,0 +1,19 @@
+.BlogCard{
+    background-color: red;
+    width: 350px;
+    border-radius: 20px;
+   
+}
+
+.Image{
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.categoryDate{
+    display: flex;
+}
+.categoryDate,.contentTitle,.username{
+padding-left: 15px;
+}
+
