@@ -1,13 +1,13 @@
 
 import { chooseImage } from '@/context/mycontext'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import styles from '../styles/BlogCard.module.css'
 
 
 
 type BlogCardProps = {
-    image: string,
     title: string,
     date: string,
     category: string,
@@ -20,9 +20,10 @@ type BlogCardProps = {
 
 const BlogCard = (BlogCardProp: BlogCardProps) => {
 
-    const { image, title, date, category, content, username, favourites, onClick } = BlogCardProp
+    const { _id, title, date, category, content, username, favourites, onClick } = BlogCardProp
 
     return (
+        <Link href={`/blogs/${_id}`}>
         <div className={styles.BlogCard}>
             <div>
                 <div><Image
@@ -47,6 +48,7 @@ const BlogCard = (BlogCardProp: BlogCardProps) => {
                 <button onClick={onClick}>{favourites}</button>
             </div>
         </div>
+        </Link>
     )
 }
 

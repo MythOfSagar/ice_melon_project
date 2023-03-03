@@ -4,22 +4,26 @@ import { Blog, chooseImage, MyContext, MyContextType, serverUrl } from '@/contex
 import BlogCard from '@/components/BlogCard';
 import Filter from '@/components/Filter'
 
-export default function Home() {
+type staticBlogsProps={
+  staticBlogs:Blog[]
+}
+
+export default function Home({staticBlogs}:staticBlogsProps) {
 
 
-  const { allBlogs, data, setAllBlogs } = useContext<MyContextType>(MyContext);
+  const {data} = useContext<MyContextType>(MyContext);
 
-  const [stateBlogs, setStateBlogs] = useState<Blog[]>(allBlogs)
+  const [stateBlogs, setStateBlogs] = useState<Blog[]>(staticBlogs)
   const [category,setCategory]=useState<string>('Select Category')
 
-  const getBlogs = async () => {
-    let resp
-     if(category==='Select Category'){resp = await fetch(`${serverUrl}/blogs`)}
-     else{resp = await fetch(`${serverUrl}/blogs?category=${category}`)}
-    const blogs = await resp.json()
-    setAllBlogs(blogs)
-    setStateBlogs(blogs)
-  }
+  // const getBlogs = async () => {
+  //   let resp
+  //    if(category==='Select Category'){resp = await fetch(`${serverUrl}/blogs`)}
+  //    else{resp = await fetch(`${serverUrl}/blogs?category=${category}`)}
+  //   const blogs = await resp.json()
+  //   setAllBlogs(blogs)
+  //   setStateBlogs(blogs)
+  // }
 
   const handleFavourites = async (status: boolean, blogId: string) => {
     if(!data.token){
@@ -77,7 +81,7 @@ export default function Home() {
 
   useEffect(() => {
  
-      getBlogs()
+      //getBlogs()
     
   }, [category])
 
@@ -95,7 +99,6 @@ export default function Home() {
             onClick={() => handleFavourites(blog.favourites[`${data.userId}`], blog._id)}
             favourites={blog.favourites[`${data.userId}`] ? "Remove" : "Add"}
             category={blog.category}
-            image={category}
             content={blog.content}
             date={blog.date}
             title={blog.title}
@@ -106,4 +109,18 @@ export default function Home() {
       </div>
     </>
   )
+}
+
+
+export const getStaticProps=async ()=>{
+  
+  const resp= await fetch(`${serverUrl}/blogs`)
+  const data= await resp.json()
+  
+  return {
+    props:{
+      staticBlogs:data
+    }
+  }
+
 }

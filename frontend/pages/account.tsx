@@ -25,9 +25,11 @@ type Option = {
   label: string;
 }
 
+type staticBlogsProps={
+  staticBlogs:Blog[]
+}
 
-
-export default function Account() {
+export default function Account({staticBlogs}:staticBlogsProps) {
 
   const [currentBlog, setCurrentBlog] = useState<Blog>({
     title: "",
@@ -130,7 +132,7 @@ onClose()
 
   const router = useRouter();
   const { allBlogs, data, setAllBlogs, setData } = useContext<MyContextType>(MyContext);
-  const [stateBlogs, setStateBlogs] = useState<Blog[]>(allBlogs)
+  const [stateBlogs, setStateBlogs] = useState<Blog[]>(staticBlogs)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
@@ -221,7 +223,7 @@ onClose()
 
   useEffect(() => {
 
-    getBlogs()
+    //getBlogs()
 
   }, [category])
 
@@ -292,7 +294,7 @@ onClose()
 
               favourites={blog.favourites[`${data.userId}`] ? "Remove" : "Add"}
               category={blog.category}
-              image={`https://i.ibb.co/jWTQB1f/IMG-20230219-012652.jpg`}
+        
               content={blog.content}
               date={blog.date}
               title={blog.title}
@@ -312,4 +314,18 @@ onClose()
     </>
 
   )
+}
+
+
+export const getStaticProps=async ()=>{
+  
+  const resp= await fetch(`${serverUrl}/blogs`)
+  const data= await resp.json()
+  
+  return {
+    props:{
+      staticBlogs:data
+    }
+  }
+
 }

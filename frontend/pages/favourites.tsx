@@ -5,13 +5,16 @@ import { Blog, MyContext, MyContextType, serverUrl } from '@/context/mycontext';
 import BlogCard from '@/components/BlogCard';
 import Filter from '@/components/Filter';
 
+type staticBlogsProps={
+  staticBlogs:Blog[]
+}
 
-export default function Favourites() {
+export default function Favourites({staticBlogs}:staticBlogsProps) {
 
 
   const { allBlogs, data, setAllBlogs } = useContext<MyContextType>(MyContext);
 
-  const [stateBlogs, setStateBlogs] = useState<Blog[]>(allBlogs)
+  const [stateBlogs, setStateBlogs] = useState<Blog[]>(staticBlogs)
 
 
   const [category,setCategory]=useState<string>('Select Category')
@@ -79,7 +82,7 @@ console.log("Login to Add to Favourite")
 
   useEffect(() => {
    
-      getBlogs()
+      //getBlogs()
     
   }, [category])
 
@@ -99,7 +102,7 @@ console.log("Login to Add to Favourite")
 
             favourites={blog.favourites[`${data.userId}`] ? "Remove" : "Add"}
             category={blog.category}
-            image={`https://i.ibb.co/jWTQB1f/IMG-20230219-012652.jpg`}
+           
             content={blog.content}
             date={blog.date}
             title={blog.title}
@@ -113,4 +116,18 @@ console.log("Login to Add to Favourite")
     </>
     
   )
+}
+
+
+export const getStaticProps=async ()=>{
+  
+  const resp= await fetch(`${serverUrl}/blogs`)
+  const data= await resp.json()
+  
+  return {
+    props:{
+      staticBlogs:data
+    }
+  }
+
 }
