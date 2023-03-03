@@ -1,27 +1,87 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-import { useContext } from 'react';
-import { MyContext, MyContextType } from '@/context/mycontext';
+import { useContext, useEffect, useState } from 'react';
+import { Blog, MyContext, MyContextType, serverUrl } from '@/context/mycontext';
 import BlogCard from '@/components/BlogCard';
-
-
 
 
 export default function Home() {
 
-  const { allBlogs,data } = useContext<MyContextType>(MyContext);
 
-  const handleFavourites=(status:boolean)=>{
-if(status){
-  console.log("Remove from Favourite")
-}else{
-  console.log("Add to Favourite")
-}
+  const { allBlogs, data, setAllBlogs } = useContext<MyContextType>(MyContext);
+
+  const [stateBlogs, setStateBlogs] = useState<Blog[]>(allBlogs)
+
+
+
+
+
+  const getBlogs = async () => {
+    const resp = await fetch(`${serverUrl}/blogs`)
+    const blogs = await resp.json()
+
+    setAllBlogs(blogs)
+    console.log(blogs, '%%%', allBlogs)
+    setStateBlogs(blogs)
   }
 
-  console.log(allBlogs,data )
+  const handleFavourites = async (status: boolean, blogId: string) => {
+    if(!data.token){
+ console.log("Login to Add to Favourite")
+    }else{if (status) {
+     setStateBlogs(stateBlogs.map((blog: Blog) => {
+ 
+       if (blog._id === blogId) {
+         const temp = blog
+         temp['favourites'][`${data.userId}`] = false
+         return temp
+       }
+ 
+       return blog
+     }))
+     await fetch(`${serverUrl}/blogs/removefromfavourite/${blogId}`, {
+       method: 'PATCH',
+       mode: 'cors',
+       headers: {
+         'Content-Type': 'application/json',
+         "authorization": `${data.token}`
+       }
+     }).then(res => console.log("Removed from Favourite", status))
+ 
+   } else {
+ 
+   
+ 
+     setStateBlogs(stateBlogs.map((blog: Blog) => {
+ 
+       if (blog._id === blogId) {
+         const temp = blog
+         temp['favourites'][`${data.userId}`] = true
+         return temp
+       }
+ 
+       return blog
+     }))
+ 
+     await fetch(`${serverUrl}/blogs/addtofavourite/${blogId}`, {
+       method: 'PATCH',
+       mode: 'cors',
+       headers: {
+         'Content-Type': 'application/json',
+         "authorization": `${data.token}`
+       }
+     }).then(res => console.log("Removed from Favourite", status))
+ 
+ 
+   }}
+     
+   }
+
+  useEffect(() => {
+ 
+      getBlogs()
+    
+  }, [])
 
   return (
     <>
@@ -32,19 +92,20 @@ if(status){
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        {allBlogs.map(((blog, i) => (
+        {stateBlogs.map(((blog, i) => (
           <BlogCard
-          onClick={()=>handleFavourites(blog.favourites['63fc9137279e3c2d73025d80'])}
-          
-          favourites={blog.favourites['63fc9137279e3c2d73025d80'] ? "Remove" : "Add"}
-          category={blog.category}
-          image={`https://i.ibb.co/jWTQB1f/IMG-20230219-012652.jpg`}
-          content={blog.content}
-          date={blog.date}
-          title={blog.title}
-          username={blog.userName}
-          key={i}
-        ></BlogCard>)))}
+            onClick={() => handleFavourites(blog.favourites[`${data.userId}`], blog._id)}
+
+            favourites={blog.favourites[`${data.userId}`] ? "Remove" : "Add"}
+            category={blog.category}
+            image={`https://i.ibb.co/jWTQB1f/IMG-20230219-012652.jpg`}
+            content={blog.content}
+            date={blog.date}
+            title={blog.title}
+            username={blog.userName}
+            key={i}
+            _id={blog._id}
+          ></BlogCard>)))}
       </div>
     </>
   )

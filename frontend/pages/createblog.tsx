@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { useToast } from '@chakra-ui/react'
 import Textarea from "../components/TextArea"
 import Select from "../components/Select"
-import { MyContext, MyContextType } from '@/context/mycontext'
+import { MyContext, MyContextType, serverUrl } from '@/context/mycontext'
 
 
 const CreateBlog = () => {
@@ -14,7 +14,6 @@ const CreateBlog = () => {
     title: "",
     date: '2022-10-20',
     content: "",
-    userName: data,
     category: "Tech",
     image: "",
     favourites:{a:true}
@@ -48,11 +47,12 @@ const CreateBlog = () => {
 
     console.log(blogData)
  
-    await fetch(`https://ice-melon.onrender.com/blogs`, {
+    await fetch(`${serverUrl}/blogs`, {
       method: "POST",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
+        "authorization": `${data.token}`
       },
       body: JSON.stringify(blogData),
     }).then(response => {
@@ -65,6 +65,7 @@ const CreateBlog = () => {
         })
       }
       else {
+        console.log(response)
         toast({
           title: `Error Occured Please Try Again.`,
           status: 'error',

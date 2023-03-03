@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { MyContext, MyContextType } from '@/context/mycontext'
+import { MyContext, MyContextType, serverUrl } from '@/context/mycontext'
 
 const Login = () => {
   const router = useRouter()
@@ -31,17 +31,19 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    await fetch(`https://ice-melon.onrender.com/users/logIn`, {
+    await fetch(`${serverUrl}/users/logIn`, {
       method: "POST",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(userData),
-    }).then(response => {
+    }).then(async(response) => {
       if (response.ok) {
-        localStorage.setItem("iceMelonUserName", userData.userName)
-        setData(userData.userName)
+        const details=await response.json()
+        console.log(details)
+        localStorage.setItem("iceMelonUser", JSON.stringify(details))
+        setData(details)
         toast({
           title: 'Successfully Loged In',
           description: "You Can Continue Reading Blogs.",
@@ -49,7 +51,7 @@ const Login = () => {
           duration: 2500,
           isClosable: true,
         })
-        router.push('/')
+         router.push('/')
       } else if (response.status === 401) {
         toast({
           title: `Wrong Password`,

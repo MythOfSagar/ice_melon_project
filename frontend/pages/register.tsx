@@ -1,30 +1,32 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useToast } from '@chakra-ui/react'
-
+import { MyContext, MyContextType, serverUrl } from '@/context/mycontext'
+import { useRouter } from 'next/router'
 
 const Register = () => {
-
+  const router = useRouter()
   const toast = useToast()
-  
+  const { setData } = useContext<MyContextType>(MyContext);
+
   const initialData = {
     email: "",
     password: "",
     userName: ""
   }
 
-  const [userData, setData] = useState(initialData)
+  const [userData, setUserData] = useState(initialData)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
     const { title, value } = e.target
 
-    setData({ ...userData, [title]: value })
+    setUserData({ ...userData, [title]: value })
 
   }
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    await fetch(`https://ice-melon.onrender.com/users/signIn`, {
+    await fetch(`${serverUrl}/users/signIn`, {
       method: "POST",
       mode: "cors",
       headers: {
@@ -33,6 +35,11 @@ const Register = () => {
       body: JSON.stringify(userData),
     }).then(response => {
       if (response.ok) {
+        setData("")
+        if (typeof window !== 'undefined') {
+          localStorage.clear()
+        }
+        router.push('/login')
         toast({
           title: 'Account created.',
           description: "We've created your account for you.",
