@@ -56,7 +56,7 @@ blogRouter.get("/favourites/:id", async (req, res) => {
   }
 });
 
-blogRouter.delete("/:id", async (req, res) => {
+blogRouter.delete("/delete/:id", async (req, res) => {
   const { id } = req.params;
   console.log(id);
 
@@ -68,7 +68,7 @@ blogRouter.delete("/:id", async (req, res) => {
   }
 });
 
-blogRouter.patch("/:id", async (req, res) => {
+blogRouter.patch("/edit/:id", async (req, res) => {
   const { id } = req.params;
   const udatedDetails = req.body;
 

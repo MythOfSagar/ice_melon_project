@@ -24,7 +24,6 @@ const CreateBlog = () => {
     { value: 'Entertainment'},
     { value: 'Sports' },
     { value: 'Economy' }
-
   ]
 
   const [blogData, setBlogData] = useState(initialData)
