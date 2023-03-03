@@ -35,7 +35,10 @@ const Register = () => {
       body: JSON.stringify(userData),
     }).then(response => {
       if (response.ok) {
-        setData("")
+        setData({
+          userId: null,
+          token: null
+      })
         if (typeof window !== 'undefined') {
           localStorage.clear()
         }
