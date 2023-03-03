@@ -1,9 +1,8 @@
 import Head from 'next/head'
-import styles from '@/styles/Home.module.css'
 import { useContext, useEffect, useState } from 'react';
-import { Blog, MyContext, MyContextType, serverUrl } from '@/context/mycontext';
+import { Blog, chooseImage, MyContext, MyContextType, serverUrl } from '@/context/mycontext';
 import BlogCard from '@/components/BlogCard';
-
+import Filter from '@/components/Filter'
 
 export default function Home() {
 
@@ -11,17 +10,14 @@ export default function Home() {
   const { allBlogs, data, setAllBlogs } = useContext<MyContextType>(MyContext);
 
   const [stateBlogs, setStateBlogs] = useState<Blog[]>(allBlogs)
-
-
-
-
+  const [category,setCategory]=useState<string>('Select Category')
 
   const getBlogs = async () => {
-    const resp = await fetch(`${serverUrl}/blogs`)
+    let resp
+     if(category==='Select Category'){resp = await fetch(`${serverUrl}/blogs`)}
+     else{resp = await fetch(`${serverUrl}/blogs?category=${category}`)}
     const blogs = await resp.json()
-
     setAllBlogs(blogs)
-    console.log(blogs, '%%%', allBlogs)
     setStateBlogs(blogs)
   }
 
@@ -77,11 +73,13 @@ export default function Home() {
      
    }
 
+   
+
   useEffect(() => {
  
       getBlogs()
     
-  }, [])
+  }, [category])
 
   return (
     <>
@@ -91,14 +89,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
+      <div><><Filter handleCategory={(category)=>setCategory(category)}></Filter></>
         {stateBlogs.map(((blog, i) => (
           <BlogCard
             onClick={() => handleFavourites(blog.favourites[`${data.userId}`], blog._id)}
-
             favourites={blog.favourites[`${data.userId}`] ? "Remove" : "Add"}
             category={blog.category}
-            image={`https://i.ibb.co/jWTQB1f/IMG-20230219-012652.jpg`}
+            image={category}
             content={blog.content}
             date={blog.date}
             title={blog.title}

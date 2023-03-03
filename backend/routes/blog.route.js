@@ -6,9 +6,16 @@ const { BlogModel } = require("../models/blog.model");
 
 blogRouter.get("/", async (req, res) => {
 
-  try {
-    const allBlogs = await BlogModel.find();
+  const {category}=req.query
 
+  try {
+    let allBlogs
+    if(category){
+      allBlogs = await BlogModel.find({category});
+    }else{
+      allBlogs = await BlogModel.find();
+    }
+   
     res.status(200).send(allBlogs);
   } catch (err) {
     res.status(500).send(err);

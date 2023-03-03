@@ -25,7 +25,18 @@ export interface MyContextType {
     setData: React.Dispatch<React.SetStateAction<dataType>>,
 }
 
+export const chooseImage=(category:string)=>{
+    switch (category) {
 
+      case 'Tech':{ return 'https://i.ibb.co/QQ3L30x/n.jpg'}
+      case 'Humour':{ return 'https://i.ibb.co/yF5yVvT/n.jpg'}
+      case 'Entertainment':{ return 'https://i.ibb.co/jySNx3n/n.jpg'}
+      case 'Sports':{ return 'https://i.ibb.co/HgtKm1H/n.jpg'}
+      case 'Economy':{ return 'https://i.ibb.co/Dkyk34F/n.jpg'}
+
+      default: return ""
+    }
+   }
 
 export let MyContext = React.createContext<MyContextType>({
     allBlogs: [],

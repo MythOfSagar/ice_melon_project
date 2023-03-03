@@ -19,6 +19,7 @@ import {
 
 import { Textarea } from "@chakra-ui/react"
 import Select from "../components/Select"
+import Filter from '@/components/Filter';
 type Option = {
   value: string;
   label: string;
@@ -40,6 +41,17 @@ export default function Account() {
   })
 
   const toast = useToast()
+
+  const [category,setCategory]=useState<string>('Select Category')
+
+  const getBlogs = async () => {
+    let resp
+     if(category==='Select Category'){resp = await fetch(`${serverUrl}/blogs`)}
+     else{resp = await fetch(`${serverUrl}/blogs?category=${category}`)}
+    const blogs = await resp.json()
+    setAllBlogs(blogs)
+    setStateBlogs(blogs)
+  }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { title, value } = event.target
@@ -132,14 +144,7 @@ onClose()
       localStorage.clear()
     }
   }
-  const getBlogs = async () => {
-    const resp = await fetch(`${serverUrl}/blogs`)
-    const blogs = await resp.json()
-
-    setAllBlogs(blogs)
-    console.log(blogs, '%%%', allBlogs)
-    setStateBlogs(blogs)
-  }
+ 
 
   const handleEdit = async (blogId: string) => {
 
@@ -218,7 +223,7 @@ onClose()
 
     getBlogs()
 
-  }, [])
+  }, [category])
 
   return (
     <>
@@ -279,6 +284,7 @@ onClose()
             </ModalContent>
           </Modal>
         </>
+        <><Filter handleCategory={(category)=>setCategory(category)}></Filter></>
         <div>
           {stateBlogs.map(((blog, i) => {
             if (blog.creator === data.userId) return <div key={i}><BlogCard

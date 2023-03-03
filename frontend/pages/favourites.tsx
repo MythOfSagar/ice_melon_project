@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { useContext, useEffect, useState } from 'react';
 import { Blog, MyContext, MyContextType, serverUrl } from '@/context/mycontext';
 import BlogCard from '@/components/BlogCard';
+import Filter from '@/components/Filter';
 
 
 export default function Favourites() {
@@ -13,12 +14,14 @@ export default function Favourites() {
   const [stateBlogs, setStateBlogs] = useState<Blog[]>(allBlogs)
 
 
-  const getBlogs = async () => {
-    const resp = await fetch(`${serverUrl}/blogs`)
-    const blogs = await resp.json()
+  const [category,setCategory]=useState<string>('Select Category')
 
+  const getBlogs = async () => {
+    let resp
+     if(category==='Select Category'){resp = await fetch(`${serverUrl}/blogs`)}
+     else{resp = await fetch(`${serverUrl}/blogs?category=${category}`)}
+    const blogs = await resp.json()
     setAllBlogs(blogs)
-    console.log(blogs, '%%%', allBlogs)
     setStateBlogs(blogs)
   }
 
@@ -78,7 +81,7 @@ console.log("Login to Add to Favourite")
    
       getBlogs()
     
-  }, [])
+  }, [category])
 
   return (
     <>
@@ -89,6 +92,7 @@ console.log("Login to Add to Favourite")
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
+      <><Filter handleCategory={(category)=>setCategory(category)}></Filter></>
         {stateBlogs.map(((blog, i) => 
        { if(blog.favourites[`${data.userId}`]) return<BlogCard
             onClick={() => handleFavourites(blog.favourites[`${data.userId}`], blog._id)}

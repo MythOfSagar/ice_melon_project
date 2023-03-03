@@ -1,4 +1,5 @@
 
+import { chooseImage } from '@/context/mycontext'
 import Image from 'next/image'
 import React from 'react'
 import styles from '../styles/BlogCard.module.css'
@@ -27,7 +28,7 @@ const BlogCard = (BlogCardProp: BlogCardProps) => {
                 <div><Image
                     className={styles.Image}
                     alt={category}
-                    src={image}
+                    src={chooseImage(category)}
                     width={350}
                     height={200}
                 ></Image>
