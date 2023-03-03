@@ -10,7 +10,7 @@ const Navbar = () => {
 
   //const [allBlogs, setAllBlogs] = useState<Blog[]>([])
 
-  const { data, setData} = useContext<MyContextType>(MyContext);
+  const {setData, data} = useContext<MyContextType>(MyContext);
 
 
   // const getBlogs = async () => {
