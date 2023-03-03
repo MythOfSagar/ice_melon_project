@@ -9,7 +9,7 @@ interface blogProps {
     blog: Blog;
 }
 
-export default function blogPage({ blog }: blogProps) {
+export default function BlogPage({ blog }: blogProps) {
     const router = useRouter();
 
     if (router.isFallback) {
