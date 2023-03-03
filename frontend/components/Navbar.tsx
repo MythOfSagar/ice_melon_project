@@ -10,20 +10,20 @@ const Navbar = () => {
 
   //const [allBlogs, setAllBlogs] = useState<Blog[]>([])
 
-  const { data, setData, allBlogs, setAllBlogs } = useContext<MyContextType>(MyContext);
+  const { data, setData} = useContext<MyContextType>(MyContext);
 
 
-  const getBlogs = async () => {
-    const resp = await fetch(`${serverUrl}/blogs`)
-    const blogs = await resp.json()
-    console.log(blogs)
-    setAllBlogs(blogs)
-  }
+  // const getBlogs = async () => {
+  //   const resp = await fetch(`${serverUrl}/blogs`)
+  //   const blogs = await resp.json()
+  //   console.log(blogs)
+  //   setAllBlogs(blogs)
+  // }
 
   useEffect(() => {
-    if (allBlogs.length === 0) {
-      getBlogs()
-    }
+    // if (allBlogs.length === 0) {
+    //   getBlogs()
+    // }
 
     if (typeof window !== 'undefined') {
       const iceMelonUser = localStorage.getItem('iceMelonUser');

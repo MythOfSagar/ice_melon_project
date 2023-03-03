@@ -79,11 +79,11 @@ export default function Home({staticBlogs}:staticBlogsProps) {
 
    
 
-  useEffect(() => {
+  // useEffect(() => {
  
-      //getBlogs()
+  //     //getBlogs()
     
-  }, [category])
+  // }, [category])
 
   return (
     <>

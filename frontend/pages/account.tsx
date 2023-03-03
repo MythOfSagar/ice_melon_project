@@ -46,14 +46,14 @@ export default function Account({staticBlogs}:staticBlogsProps) {
 
   const [category,setCategory]=useState<string>('Select Category')
 
-  const getBlogs = async () => {
-    let resp
-     if(category==='Select Category'){resp = await fetch(`${serverUrl}/blogs`)}
-     else{resp = await fetch(`${serverUrl}/blogs?category=${category}`)}
-    const blogs = await resp.json()
-    setAllBlogs(blogs)
-    setStateBlogs(blogs)
-  }
+  // const getBlogs = async () => {
+  //   let resp
+  //    if(category==='Select Category'){resp = await fetch(`${serverUrl}/blogs`)}
+  //    else{resp = await fetch(`${serverUrl}/blogs?category=${category}`)}
+  //   const blogs = await resp.json()
+    
+  //   setStateBlogs(blogs)
+  // }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { title, value } = event.target
@@ -131,7 +131,7 @@ onClose()
   ]
 
   const router = useRouter();
-  const { allBlogs, data, setAllBlogs, setData } = useContext<MyContextType>(MyContext);
+  const {  data,  setData } = useContext<MyContextType>(MyContext);
   const [stateBlogs, setStateBlogs] = useState<Blog[]>(staticBlogs)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = React.useRef(null)
@@ -221,11 +221,11 @@ onClose()
 
   }
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    //getBlogs()
+  //   //getBlogs()
 
-  }, [category])
+  // }, [category])
 
   return (
     <>

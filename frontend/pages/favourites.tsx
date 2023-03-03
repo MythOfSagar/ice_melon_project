@@ -12,21 +12,21 @@ type staticBlogsProps={
 export default function Favourites({staticBlogs}:staticBlogsProps) {
 
 
-  const { allBlogs, data, setAllBlogs } = useContext<MyContextType>(MyContext);
+  const { data } = useContext<MyContextType>(MyContext);
 
   const [stateBlogs, setStateBlogs] = useState<Blog[]>(staticBlogs)
 
 
   const [category,setCategory]=useState<string>('Select Category')
 
-  const getBlogs = async () => {
-    let resp
-     if(category==='Select Category'){resp = await fetch(`${serverUrl}/blogs`)}
-     else{resp = await fetch(`${serverUrl}/blogs?category=${category}`)}
-    const blogs = await resp.json()
-    setAllBlogs(blogs)
-    setStateBlogs(blogs)
-  }
+  // const getBlogs = async () => {
+  //   let resp
+  //    if(category==='Select Category'){resp = await fetch(`${serverUrl}/blogs`)}
+  //    else{resp = await fetch(`${serverUrl}/blogs?category=${category}`)}
+  //   const blogs = await resp.json()
+  //   setAllBlogs(blogs)
+  //   setStateBlogs(blogs)
+  // }
 
   const handleFavourites = async (status: boolean, blogId: string) => {
    if(!data.token){
@@ -80,11 +80,11 @@ console.log("Login to Add to Favourite")
     
   }
 
-  useEffect(() => {
+  // useEffect(() => {
    
-      //getBlogs()
+  //     //getBlogs()
     
-  }, [category])
+  // }, [category])
 
   return (
     <>
