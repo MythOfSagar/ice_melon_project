@@ -62,6 +62,11 @@ const CreateBlog = () => {
           duration: 2500,
           isClosable: true,
         })
+        
+        localStorage.setItem("regenrateHome", JSON.stringify(true))
+        localStorage.setItem("regenrateBlog", JSON.stringify(true))
+        localStorage.setItem("regenrateAccount", JSON.stringify(true))
+        
       }
       else {
         console.log(response)
@@ -74,7 +79,7 @@ const CreateBlog = () => {
     })
       .catch(error => {
         console.error(error);
-        // Display error message to user
+      
       });
 
 

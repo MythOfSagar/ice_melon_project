@@ -4,14 +4,14 @@ import { Blog, MyContext, MyContextType, serverUrl } from '@/context/mycontext';
 import BlogCard from '@/components/BlogCard';
 // import Filter from '@/components/Filter'
 
-type staticBlogsProps={
-  staticBlogs:Blog[]
+type staticBlogsProps = {
+  staticBlogs: Blog[]
 }
 
-export default function Home({staticBlogs}:staticBlogsProps) {
+export default function Home({ staticBlogs }: staticBlogsProps) {
 
 
-  const {data} = useContext<MyContextType>(MyContext);
+  const { data } = useContext<MyContextType>(MyContext);
 
   const [stateBlogs, setStateBlogs] = useState<Blog[]>(staticBlogs)
   // const [category,setCategory]=useState<string>('Select Category')
@@ -26,65 +26,67 @@ export default function Home({staticBlogs}:staticBlogsProps) {
   // }
 
   const handleFavourites = async (status: boolean, blogId: string) => {
-    if(!data.token){
- console.log("Login to Add to Favourite")
-    }else{if (status) {
-     setStateBlogs(stateBlogs.map((blog: Blog) => {
- 
-       if (blog._id === blogId) {
-         const temp = blog
-         temp['favourites'][`${data.userId}`] = false
-         return temp
-       }
- 
-       return blog
-     }))
-     await fetch(`${serverUrl}/blogs/removefromfavourite/${blogId}`, {
-       method: 'PATCH',
-       mode: 'cors',
-       headers: {
-         'Content-Type': 'application/json',
-         "authorization": `${data.token}`
-       }
-     }).then(res => console.log("Removed from Favourite", res))
-     .catch(err=>console.log(err))
- 
-   } else {
- 
-   
- 
-     setStateBlogs(stateBlogs.map((blog: Blog) => {
- 
-       if (blog._id === blogId) {
-         const temp = blog
-         temp['favourites'][`${data.userId}`] = true
-         return temp
-       }
- 
-       return blog
-     }))
- 
-     await fetch(`${serverUrl}/blogs/addtofavourite/${blogId}`, {
-       method: 'PATCH',
-       mode: 'cors',
-       headers: {
-         'Content-Type': 'application/json',
-         "authorization": `${data.token}`
-       }
-     }).then(res => console.log("Added to Favourite", res))
-     .catch(err=>console.log(err))
- 
- 
-   }}
-     
-   }
+    if (!data.token) {
+      console.log("Login to Add to Favourite")
+    } else {
+      if (status) {
+        setStateBlogs(stateBlogs.map((blog: Blog) => {
 
-   
+          if (blog._id === blogId) {
+            const temp = blog
+            temp['favourites'][`${data.userId}`] = false
+            return temp
+          }
+
+          return blog
+        }))
+        await fetch(`${serverUrl}/blogs/removefromfavourite/${blogId}`, {
+          method: 'PATCH',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json',
+            "authorization": `${data.token}`
+          }
+        }).then(res => console.log("Removed from Favourite", res))
+          .catch(err => console.log(err))
+
+      } else {
+
+
+
+        setStateBlogs(stateBlogs.map((blog: Blog) => {
+
+          if (blog._id === blogId) {
+            const temp = blog
+            temp['favourites'][`${data.userId}`] = true
+            return temp
+          }
+
+          return blog
+        }))
+
+        await fetch(`${serverUrl}/blogs/addtofavourite/${blogId}`, {
+          method: 'PATCH',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json',
+            "authorization": `${data.token}`
+          }
+        }).then(res => console.log("Added to Favourite", res))
+          .catch(err => console.log(err))
+
+
+      }
+    }
+
+  }
+
+
 
   // useEffect(() => {
- 
+
   //     //getBlogs()
-    
+
   // }, [category])
 
   return (
@@ -115,15 +117,34 @@ export default function Home({staticBlogs}:staticBlogsProps) {
 }
 
 
-export const getStaticProps=async ()=>{
+export async function getStaticProps() {
+
   
-  const resp= await fetch(`${serverUrl}/blogs`)
-  const data= await resp.json()
-  
-  return {
-    props:{
-      staticBlogs:data
+
+
+  let data:any=[];
+  let regenrateHome=false;
+
+  console.log(regenrateHome,data)
+
+  if (typeof window !== 'undefined') {
+    regenrateHome = JSON.parse(localStorage.getItem('regenrateHome') || "true")
+    console.log(regenrateHome)
+    if(regenrateHome){
+      const resp = await fetch(`${serverUrl}/blogs`)
+      data = await resp.json()
     }
+
+    localStorage.setItem("regenrateHome", JSON.stringify(false))
   }
 
+  console.log(regenrateHome)
+
+ 
+  return {
+    props: {
+      staticBlogs: data
+    },
+    revalidate: 1
+  };
 }

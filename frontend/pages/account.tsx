@@ -25,11 +25,11 @@ import Select from "../components/Select"
 //   label: string;
 // }
 
-type staticBlogsProps={
-  staticBlogs:Blog[]
+type staticBlogsProps = {
+  staticBlogs: Blog[]
 }
 
-export default function Account({staticBlogs}:staticBlogsProps) {
+export default function Account({ staticBlogs }: staticBlogsProps) {
 
   const [currentBlog, setCurrentBlog] = useState<Blog>({
     title: "",
@@ -44,14 +44,14 @@ export default function Account({staticBlogs}:staticBlogsProps) {
 
   const toast = useToast()
 
- // const [category,setCategory]=useState<string>('Select Category')
+  // const [category,setCategory]=useState<string>('Select Category')
 
   // const getBlogs = async () => {
   //   let resp
   //    if(category==='Select Category'){resp = await fetch(`${serverUrl}/blogs`)}
   //    else{resp = await fetch(`${serverUrl}/blogs?category=${category}`)}
   //   const blogs = await resp.json()
-    
+
   //   setStateBlogs(blogs)
   // }
 
@@ -68,9 +68,9 @@ export default function Account({staticBlogs}:staticBlogsProps) {
     setCurrentBlog({ ...currentBlog, category: event.target.value })
   }
 
- 
+
   const handleSubmit = async () => {
-    
+
 
     console.log(currentBlog)
 
@@ -81,7 +81,7 @@ export default function Account({staticBlogs}:staticBlogsProps) {
       }
       return blog
     }))
- 
+
     await fetch(`${serverUrl}/blogs/edit/${currentBlog._id}`, {
       method: "PATCH",
       mode: "cors",
@@ -98,6 +98,9 @@ export default function Account({staticBlogs}:staticBlogsProps) {
           duration: 2500,
           isClosable: true,
         })
+        localStorage.setItem("regenrateHome", JSON.stringify(true))
+        localStorage.setItem("regenrateBlog", JSON.stringify(true))
+        localStorage.setItem("regenrateAccount", JSON.stringify(true))
       }
       else {
         console.log(response)
@@ -117,27 +120,27 @@ export default function Account({staticBlogs}:staticBlogsProps) {
         })
       });
 
-onClose()
+    onClose()
   }
-  
- 
+
+
 
   const options = [
-    { value: 'Tech'},
+    { value: 'Tech' },
     { value: 'Humour' },
-    { value: 'Entertainment'},
+    { value: 'Entertainment' },
     { value: 'Sports' },
     { value: 'Economy' }
   ]
 
   const router = useRouter();
-  const {  data,  setData } = useContext<MyContextType>(MyContext);
+  const { data, setData } = useContext<MyContextType>(MyContext);
   const [stateBlogs, setStateBlogs] = useState<Blog[]>(staticBlogs)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
 
-  
+
 
   const LogOut = () => {
     setData({ token: null, userId: null })
@@ -146,17 +149,21 @@ onClose()
       localStorage.clear()
     }
   }
- 
+
 
   const handleEdit = async (blogId: string) => {
 
-    setCurrentBlog(stateBlogs.filter((blog)=>blog._id===blogId)[0])
+    setCurrentBlog(stateBlogs.filter((blog) => blog._id === blogId)[0])
 
     onOpen()
   }
   const handleDelete = async (blogId: string) => {
 
     setStateBlogs(stateBlogs.filter((blog: Blog) => blog._id !== blogId))
+
+    localStorage.setItem("regenrateHome", JSON.stringify(true))
+    localStorage.setItem("regenrateBlog", JSON.stringify(true))
+    localStorage.setItem("regenrateAccount", JSON.stringify(true))
 
     await fetch(`${serverUrl}/blogs/delete/${blogId}`, {
       method: 'DELETE',
@@ -251,34 +258,34 @@ onClose()
               <ModalHeader>Create your account</ModalHeader>
               <ModalCloseButton />
               <ModalBody pb={6}>
-              <div className="form">
-        <form method="post"
-          onSubmit={handleSubmit}
-          style={{ width: 'fit-content', display: 'flex', flexDirection: 'column' }}>
-          <label>Title:</label>
-          <input
-            value={currentBlog.title}
-            onChange={handleChange}
-            type="text"
-            title="title" />
-          <label>Category:</label>
-          <Select
-            value={currentBlog.category}
-            onChange={handleSelectChange}
-            options={options} />
-          <label >Content:</label>
-          <Textarea
-            value={currentBlog.content}
-            onChange={handleContentChange} />
-          
-        </form>
-      </div>
+                <div className="form">
+                  <form method="post"
+                    onSubmit={handleSubmit}
+                    style={{ width: 'fit-content', display: 'flex', flexDirection: 'column' }}>
+                    <label>Title:</label>
+                    <input
+                      value={currentBlog.title}
+                      onChange={handleChange}
+                      type="text"
+                      title="title" />
+                    <label>Category:</label>
+                    <Select
+                      value={currentBlog.category}
+                      onChange={handleSelectChange}
+                      options={options} />
+                    <label >Content:</label>
+                    <Textarea
+                      value={currentBlog.content}
+                      onChange={handleContentChange} />
+
+                  </form>
+                </div>
               </ModalBody>
 
               <ModalFooter>
                 <Button
                   onClick={handleSubmit}
-                 colorScheme='blue' mr={3}>
+                  colorScheme='blue' mr={3}>
                   Save
                 </Button>
                 <Button onClick={onClose}>Cancel</Button>
@@ -294,7 +301,7 @@ onClose()
 
               favourites={blog.favourites[`${data.userId}`] ? "Remove" : "Add"}
               category={blog.category}
-        
+
               content={blog.content}
               date={blog.date}
               title={blog.title}
@@ -317,15 +324,34 @@ onClose()
 }
 
 
-export const getStaticProps=async ()=>{
+export async function getStaticProps() {
+
   
-  const resp= await fetch(`${serverUrl}/blogs`)
-  const data= await resp.json()
-  
-  return {
-    props:{
-      staticBlogs:data
+
+
+  let data:any=[];
+  let regenrateHome=false;
+
+  console.log(regenrateHome,data)
+
+  if (typeof window !== 'undefined') {
+    regenrateHome = JSON.parse(localStorage.getItem('regenrateAccount') || "true")
+
+    if(regenrateHome){
+      const resp = await fetch(`${serverUrl}/blogs`)
+      data = await resp.json()
     }
+
+    localStorage.setItem("regenrateAccount", JSON.stringify(false))
   }
 
+  console.log(regenrateHome)
+
+ 
+  return {
+    props: {
+      staticBlogs: data
+    },
+    revalidate: 1
+  };
 }
