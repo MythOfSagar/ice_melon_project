@@ -1,4 +1,6 @@
 import React from 'react';
+// import * as dotenv from 'dotenv' 
+// dotenv.config()
 
 type favouritesType = Record<string, boolean>;
 
@@ -19,8 +21,6 @@ export interface dataType {
 }
 
 export interface MyContextType {
-    allBlogs: Blog[],
-    setAllBlogs: (allBlogs: Blog[]) => void;
     data: dataType,
     setData: React.Dispatch<React.SetStateAction<dataType>>,
 }
@@ -39,16 +39,16 @@ export const chooseImage=(category:string)=>{
    }
 
 export let MyContext = React.createContext<MyContextType>({
-    allBlogs: [],
+  
     data: {
         userId: null,
         token: null
     },
-    setAllBlogs: () => { },
+    
     setData: () => { },
 });
 
 
-export const serverUrl = 'http://localhost:7777'
+export const serverUrl = 'https://ice-melon.onrender.com'  //process.env.serverUrl
 
 

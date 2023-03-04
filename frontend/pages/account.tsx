@@ -1,7 +1,7 @@
 
 import { useRouter } from 'next/router';
 import Head from 'next/head'
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Blog, MyContext, MyContextType, serverUrl } from '@/context/mycontext';
 import BlogCard from '@/components/BlogCard';
 import { useDisclosure } from '@chakra-ui/react'
@@ -19,11 +19,11 @@ import {
 
 import { Textarea } from "@chakra-ui/react"
 import Select from "../components/Select"
-import Filter from '@/components/Filter';
-type Option = {
-  value: string;
-  label: string;
-}
+// import Filter from '@/components/Filter';
+// type Option = {
+//   value: string;
+//   label: string;
+// }
 
 type staticBlogsProps={
   staticBlogs:Blog[]
@@ -44,7 +44,7 @@ export default function Account({staticBlogs}:staticBlogsProps) {
 
   const toast = useToast()
 
-  const [category,setCategory]=useState<string>('Select Category')
+ // const [category,setCategory]=useState<string>('Select Category')
 
   // const getBlogs = async () => {
   //   let resp
@@ -286,7 +286,7 @@ onClose()
             </ModalContent>
           </Modal>
         </>
-        <><Filter handleCategory={(category)=>setCategory(category)}></Filter></>
+        {/* <><Filter handleCategory={(category)=>setCategory(category)}></Filter></> */}
         <div>
           {stateBlogs.map(((blog, i) => {
             if (blog.creator === data.userId) return <div key={i}><BlogCard

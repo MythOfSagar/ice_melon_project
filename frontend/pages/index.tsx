@@ -1,8 +1,8 @@
 import Head from 'next/head'
-import { useContext, useEffect, useState } from 'react';
-import { Blog, chooseImage, MyContext, MyContextType, serverUrl } from '@/context/mycontext';
+import { useContext, useState } from 'react';
+import { Blog, MyContext, MyContextType, serverUrl } from '@/context/mycontext';
 import BlogCard from '@/components/BlogCard';
-import Filter from '@/components/Filter'
+// import Filter from '@/components/Filter'
 
 type staticBlogsProps={
   staticBlogs:Blog[]
@@ -14,7 +14,7 @@ export default function Home({staticBlogs}:staticBlogsProps) {
   const {data} = useContext<MyContextType>(MyContext);
 
   const [stateBlogs, setStateBlogs] = useState<Blog[]>(staticBlogs)
-  const [category,setCategory]=useState<string>('Select Category')
+  // const [category,setCategory]=useState<string>('Select Category')
 
   // const getBlogs = async () => {
   //   let resp
@@ -46,7 +46,8 @@ export default function Home({staticBlogs}:staticBlogsProps) {
          'Content-Type': 'application/json',
          "authorization": `${data.token}`
        }
-     }).then(res => console.log("Removed from Favourite", status))
+     }).then(res => console.log("Removed from Favourite", res))
+     .catch(err=>console.log(err))
  
    } else {
  
@@ -70,7 +71,8 @@ export default function Home({staticBlogs}:staticBlogsProps) {
          'Content-Type': 'application/json',
          "authorization": `${data.token}`
        }
-     }).then(res => console.log("Removed from Favourite", status))
+     }).then(res => console.log("Added to Favourite", res))
+     .catch(err=>console.log(err))
  
  
    }}
@@ -93,7 +95,8 @@ export default function Home({staticBlogs}:staticBlogsProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div><><Filter handleCategory={(category)=>setCategory(category)}></Filter></>
+      <div>
+        {/* <><Filter handleCategory={(category)=>setCategory(category)}></Filter></> */}
         {stateBlogs.map(((blog, i) => (
           <BlogCard
             onClick={() => handleFavourites(blog.favourites[`${data.userId}`], blog._id)}

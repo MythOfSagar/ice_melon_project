@@ -1,9 +1,9 @@
 import Head from 'next/head'
 
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Blog, MyContext, MyContextType, serverUrl } from '@/context/mycontext';
 import BlogCard from '@/components/BlogCard';
-import Filter from '@/components/Filter';
+// import Filter from '@/components/Filter';
 
 type staticBlogsProps={
   staticBlogs:Blog[]
@@ -17,7 +17,7 @@ export default function Favourites({staticBlogs}:staticBlogsProps) {
   const [stateBlogs, setStateBlogs] = useState<Blog[]>(staticBlogs)
 
 
-  const [category,setCategory]=useState<string>('Select Category')
+  // const [category,setCategory]=useState<string>('Select Category')
 
   // const getBlogs = async () => {
   //   let resp
@@ -95,7 +95,7 @@ console.log("Login to Add to Favourite")
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-      <><Filter handleCategory={(category)=>setCategory(category)}></Filter></>
+      {/* <><Filter handleCategory={(category)=>setCategory(category)}></Filter></> */}
         {stateBlogs.map(((blog, i) => 
        { if(blog.favourites[`${data.userId}`]) return<BlogCard
             onClick={() => handleFavourites(blog.favourites[`${data.userId}`], blog._id)}

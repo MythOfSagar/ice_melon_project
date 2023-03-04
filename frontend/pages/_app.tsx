@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
 
 
-  const [allBlogs, setAllBlogs] = useState<Blog[]>([])
+  
 
   const [data, setData] = useState<dataType>({
     userId: null,
@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
 
   return (<>
-    <MyContext.Provider value={{ data, setData, allBlogs, setAllBlogs }}>
+    <MyContext.Provider value={{ data, setData}}>
       <ChakraProvider>
         <Navbar />
         <Component {...pageProps} />
