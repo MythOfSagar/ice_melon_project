@@ -1,46 +1,42 @@
-import React, { useContext, useEffect, useState} from 'react'
+import React, { useContext, useEffect } from 'react'
 import Link from 'next/link';
-import { MyContext, MyContextType, serverUrl} from '@/context/mycontext';
-
+import { MyContext, MyContextType } from '@/context/mycontext';
+import styles from '../styles/Navbar.module.css'
 
 
 
 const Navbar = () => {
-  //const [token, setToken] = useState<string>('');
 
-  //const [allBlogs, setAllBlogs] = useState<Blog[]>([])
-
-  const {setData, data} = useContext<MyContextType>(MyContext);
-
-
-  // const getBlogs = async () => {
-  //   const resp = await fetch(`${serverUrl}/blogs`)
-  //   const blogs = await resp.json()
-  //   console.log(blogs)
-  //   setAllBlogs(blogs)
-  // }
+  const { setData, data } = useContext<MyContextType>(MyContext);
 
   useEffect(() => {
-    // if (allBlogs.length === 0) {
-    //   getBlogs()
-    // }
 
     if (typeof window !== 'undefined') {
       const iceMelonUser = localStorage.getItem('iceMelonUser');
       if (iceMelonUser) {
-        // setToken(storedToken)
-        // setData(storedToken);
         setData(JSON.parse(iceMelonUser))
       }
     }
   }, [])
   return (
-    <div>
-        <Link href={'/'}><h2>Icon</h2></Link>
-        <Link href={'/favourites'}><h2>Favourites</h2></Link>
-        <Link href={'/createblog'}><h2>Create Blog</h2></Link>
-        <Link href={'/register'}><h2>Register</h2></Link>
-        <Link href={data.token ? '/account' : '/login' }><h2>{data.token ? 'Account' : 'Login' }</h2></Link>
+    <div className={styles.navbar}>
+      <Link href={'/'} legacyBehavior>
+        <a className={styles.logo}>
+          Icon
+        </a>
+      </Link>
+
+      <Link href={'/createblog'} legacyBehavior>
+        <a className={styles.navLink}>Create Blog</a>
+      </Link>
+
+      <Link href={'/register'} legacyBehavior>
+        <a className={styles.navLink}>Register</a>
+      </Link>
+
+      <Link href={data.token ? '/account' : '/login'} legacyBehavior>
+        <a className={styles.navLink}>{data.token ? 'Account' : 'Login'}</a>
+      </Link>
     </div>
   )
 }

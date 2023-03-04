@@ -13,43 +13,39 @@ type BlogCardProps = {
     category: string,
     content: string,
     username: string,
-    favourites: string,
-    onClick: () => void,
     _id: string
 }
 
-const BlogCard = (BlogCardProp: BlogCardProps) => {
 
-    const { _id, title, date, category, content, username, favourites, onClick } = BlogCardProp
+
+ const BlogCard = (BlogCardProp: BlogCardProps) => {
+
+    const { _id, title, date, category, content, username } = BlogCardProp;
 
     return (
         <Link href={`/blogs/${_id}`}>
-        <div className={styles.BlogCard}>
-            <div>
-                <div><Image
-                    className={styles.Image}
-                    alt={category}
-                    src={chooseImage(category)}
-                    width={350}
-                    height={200}
-                ></Image>
+            <div className={styles.blogCard}>
+                <div className={styles.imageContainer}>
+                    <Image
+                        className={styles.image}
+                        alt={category}
+                        src={chooseImage(category)}
+                        width={350}
+                        height={200}
+                    />
                 </div>
-                <div className={styles.username}><h1>{username}</h1></div>
-                <div className={styles.contentTitle}>
-                    <h2>{title}</h2>
-                    <h4>{content}</h4>
-                </div>
-                <div className={styles.categoryDate}>
-                    <h3>{category}</h3>
-                    <h3>{date}</h3>
+                <div className={styles.detailsContainer}>
+                    <div className={styles.username}>{username}</div>
+                    <div className={styles.title}>{title}</div>
+                    <div className={styles.content}>{content}</div>
+                    <div className={styles.categoryDate}>
+                        <div className={styles.category}>{category}</div>
+                        <div className={styles.date}>{date}</div>
+                    </div>
                 </div>
             </div>
-            <div>
-                <button onClick={onClick}>{favourites}</button>
-            </div>
-        </div>
         </Link>
-    )
-}
+    );
+};
 
 export default BlogCard

@@ -16,78 +16,6 @@ export default function Home({ staticBlogs }: staticBlogsProps) {
   const [stateBlogs, setStateBlogs] = useState<Blog[]>(staticBlogs)
   // const [category,setCategory]=useState<string>('Select Category')
 
-  // const getBlogs = async () => {
-  //   let resp
-  //    if(category==='Select Category'){resp = await fetch(`${serverUrl}/blogs`)}
-  //    else{resp = await fetch(`${serverUrl}/blogs?category=${category}`)}
-  //   const blogs = await resp.json()
-  //   setAllBlogs(blogs)
-  //   setStateBlogs(blogs)
-  // }
-
-  const handleFavourites = async (status: boolean, blogId: string) => {
-    if (!data.token) {
-      console.log("Login to Add to Favourite")
-    } else {
-      if (status) {
-        setStateBlogs(stateBlogs.map((blog: Blog) => {
-
-          if (blog._id === blogId) {
-            const temp = blog
-            temp['favourites'][`${data.userId}`] = false
-            return temp
-          }
-
-          return blog
-        }))
-        await fetch(`${serverUrl}/blogs/removefromfavourite/${blogId}`, {
-          method: 'PATCH',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-            "authorization": `${data.token}`
-          }
-        }).then(res => console.log("Removed from Favourite", res))
-          .catch(err => console.log(err))
-
-      } else {
-
-
-
-        setStateBlogs(stateBlogs.map((blog: Blog) => {
-
-          if (blog._id === blogId) {
-            const temp = blog
-            temp['favourites'][`${data.userId}`] = true
-            return temp
-          }
-
-          return blog
-        }))
-
-        await fetch(`${serverUrl}/blogs/addtofavourite/${blogId}`, {
-          method: 'PATCH',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-            "authorization": `${data.token}`
-          }
-        }).then(res => console.log("Added to Favourite", res))
-          .catch(err => console.log(err))
-
-
-      }
-    }
-
-  }
-
-
-
-  // useEffect(() => {
-
-  //     //getBlogs()
-
-  // }, [category])
 
   return (
     <>
@@ -101,8 +29,8 @@ export default function Home({ staticBlogs }: staticBlogsProps) {
         {/* <><Filter handleCategory={(category)=>setCategory(category)}></Filter></> */}
         {stateBlogs.map(((blog, i) => (
           <BlogCard
-            onClick={() => handleFavourites(blog.favourites[`${data.userId}`], blog._id)}
-            favourites={blog.favourites[`${data.userId}`] ? "Remove" : "Add"}
+
+
             category={blog.category}
             content={blog.content}
             date={blog.date}

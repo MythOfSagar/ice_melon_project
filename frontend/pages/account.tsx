@@ -1,7 +1,7 @@
 
 import { useRouter } from 'next/router';
 import Head from 'next/head'
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Blog, MyContext, MyContextType, serverUrl } from '@/context/mycontext';
 import BlogCard from '@/components/BlogCard';
 import { useDisclosure } from '@chakra-ui/react'
@@ -19,11 +19,11 @@ import {
 
 import { Textarea } from "@chakra-ui/react"
 import Select from "../components/Select"
-// import Filter from '@/components/Filter';
-// type Option = {
-//   value: string;
-//   label: string;
-// }
+import Filter from '@/components/Filter';
+type Option = {
+  value: string;
+  label: string;
+}
 
 type staticBlogsProps = {
   staticBlogs: Blog[]
@@ -44,16 +44,9 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
 
   const toast = useToast()
 
-  // const [category,setCategory]=useState<string>('Select Category')
+   const [category,setCategory]=useState<string>('Select Category')
 
-  // const getBlogs = async () => {
-  //   let resp
-  //    if(category==='Select Category'){resp = await fetch(`${serverUrl}/blogs`)}
-  //    else{resp = await fetch(`${serverUrl}/blogs?category=${category}`)}
-  //   const blogs = await resp.json()
 
-  //   setStateBlogs(blogs)
-  // }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { title, value } = event.target
@@ -98,9 +91,7 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
           duration: 2500,
           isClosable: true,
         })
-        localStorage.setItem("regenrateHome", JSON.stringify(true))
-        localStorage.setItem("regenrateBlog", JSON.stringify(true))
-        localStorage.setItem("regenrateAccount", JSON.stringify(true))
+
       }
       else {
         console.log(response)
@@ -161,9 +152,6 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
 
     setStateBlogs(stateBlogs.filter((blog: Blog) => blog._id !== blogId))
 
-    localStorage.setItem("regenrateHome", JSON.stringify(true))
-    localStorage.setItem("regenrateBlog", JSON.stringify(true))
-    localStorage.setItem("regenrateAccount", JSON.stringify(true))
 
     await fetch(`${serverUrl}/blogs/delete/${blogId}`, {
       method: 'DELETE',
@@ -175,64 +163,18 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
     }).then(res => console.log("Deleted from Your Blogs"))
   }
 
-  const handleFavourites = async (status: boolean, blogId: string) => {
-    if (!data.token) {
-      console.log("Login to Add to Favourite")
-    } else {
-      if (status) {
-        setStateBlogs(stateBlogs.map((blog: Blog) => {
+  useEffect(()=>{
 
-          if (blog._id === blogId) {
-            const temp = blog
-            temp['favourites'][`${data.userId}`] = false
-            return temp
-          }
-
-          return blog
-        }))
-        await fetch(`${serverUrl}/blogs/removefromfavourite/${blogId}`, {
-          method: 'PATCH',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-            "authorization": `${data.token}`
-          }
-        }).then(res => console.log("Removed from Favourite", status))
-
-      } else {
-
-
-        setStateBlogs(stateBlogs.map((blog: Blog) => {
-
-          if (blog._id === blogId) {
-            const temp = blog
-            temp['favourites'][`${data.userId}`] = true
-            return temp
-          }
-
-          return blog
-        }))
-
-        await fetch(`${serverUrl}/blogs/addtofavourite/${blogId}`, {
-          method: 'PATCH',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-            "authorization": `${data.token}`
-          }
-        }).then(res => console.log("Removed from Favourite", status))
-
-
-      }
+    if(category!=='Select Category')
+    {
+      setStateBlogs(staticBlogs.filter((blog: Blog) => blog.category === category))
+      console.log("v")
+    }else{
+      setStateBlogs(staticBlogs)
+      console.log("bb")
     }
 
-  }
-
-  // useEffect(() => {
-
-  //   //getBlogs()
-
-  // }, [category])
+  },[category])
 
   return (
     <>
@@ -255,7 +197,7 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
           >
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader>Create your account</ModalHeader>
+              <ModalHeader>Edit Your Blog</ModalHeader>
               <ModalCloseButton />
               <ModalBody pb={6}>
                 <div className="form">
@@ -293,13 +235,13 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
             </ModalContent>
           </Modal>
         </>
-        {/* <><Filter handleCategory={(category)=>setCategory(category)}></Filter></> */}
+        <><Filter handleCategory={(category)=>setCategory(category)}></Filter></>
         <div>
           {stateBlogs.map(((blog, i) => {
             if (blog.creator === data.userId) return <div key={i}><BlogCard
-              onClick={() => handleFavourites(blog.favourites[`${data.userId}`], blog._id)}
 
-              favourites={blog.favourites[`${data.userId}`] ? "Remove" : "Add"}
+
+
               category={blog.category}
 
               content={blog.content}
