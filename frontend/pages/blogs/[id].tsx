@@ -37,6 +37,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     const paths = blogs.map((blog: Blog) => ({
         params: { id: blog._id },
+        
     }));
 
     return { paths, fallback: true };
@@ -46,5 +47,5 @@ export const getStaticProps: GetStaticProps<blogProps> = async ({ params }) => {
     const res = await fetch(`${serverUrl}/blogs/${params?.id}`);
     const blog = await res.json();
 
-    return { props: { blog } };
+    return { props: { blog },revalidate:10 };
 };

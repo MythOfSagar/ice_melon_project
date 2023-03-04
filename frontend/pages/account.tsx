@@ -324,34 +324,16 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
 }
 
 
+
+
 export async function getStaticProps() {
+  const res = await fetch(`${serverUrl}/blogs`)
+  const data = await res.json()
 
-  
-
-
-  let data:any=[];
-  let regenrateHome=false;
-
-  console.log(regenrateHome,data)
-
-  if (typeof window !== 'undefined') {
-    regenrateHome = JSON.parse(localStorage.getItem('regenrateAccount') || "true")
-
-    if(regenrateHome){
-      const resp = await fetch(`${serverUrl}/blogs`)
-      data = await resp.json()
-    }
-
-    localStorage.setItem("regenrateAccount", JSON.stringify(false))
-  }
-
-  console.log(regenrateHome)
-
- 
   return {
     props: {
       staticBlogs: data
     },
-    revalidate: 1
+    revalidate: 10
   };
 }

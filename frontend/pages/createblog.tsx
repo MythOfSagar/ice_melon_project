@@ -63,9 +63,7 @@ const CreateBlog = () => {
           isClosable: true,
         })
         
-        localStorage.setItem("regenrateHome", JSON.stringify(true))
-        localStorage.setItem("regenrateBlog", JSON.stringify(true))
-        localStorage.setItem("regenrateAccount", JSON.stringify(true))
+       
         
       }
       else {
