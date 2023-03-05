@@ -1,0 +1,35 @@
+.div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+
+  
+  .Select {
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #f5f5f5;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .Select:hover,
+  .Select:focus {
+    background-color: #e5e5e5;
+    outline: none;
+  }
+  
+  /* Optional: add a little arrow icon to the Select */
+  .Select:after {
+    content: '\25BC';
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Select from "../components/Select"
 
+import styles from '../styles/Filter.module.css'
+
 
 type Props = {
     handleCategory: (category:string) => void;
@@ -27,9 +29,9 @@ const Filter = ({handleCategory}:Props) => {
     }
 
     return (
-        <div>
-            <label>Category:</label>
-            <Select
+        <div className={styles.div}>
+            <label className={styles.label}>Category:</label>
+            <Select className={styles.Select}
                 value={category}
                 onChange={handleSelectChange}
                 options={options} />

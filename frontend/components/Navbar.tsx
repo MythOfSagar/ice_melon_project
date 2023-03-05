@@ -27,15 +27,15 @@ const Navbar = () => {
       </Link>
 
       <Link href={'/createblog'} legacyBehavior>
-        <a className={styles.navLink}>Create Blog</a>
+        <a className={styles.navLink}>Create New Blog</a>
       </Link>
 
       <Link href={'/register'} legacyBehavior>
-        <a className={styles.navLink}>Register</a>
+        <a className={styles.navLink}>Sign Up</a>
       </Link>
 
       <Link href={data.token ? '/account' : '/login'} legacyBehavior>
-        <a className={styles.navLink}>{data.token ? 'Account' : 'Login'}</a>
+        <a className={styles.navLink}>{data.token ? 'Account' : 'Sign In'}</a>
       </Link>
     </div>
   )
