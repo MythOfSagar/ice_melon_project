@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Button, useToast } from '@chakra-ui/react'
+import { Button, Heading, useToast } from '@chakra-ui/react'
 import { MyContext, MyContextType, serverUrl } from '@/context/mycontext'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
@@ -108,7 +108,10 @@ const SignUp = () => {
           className={styles.signUpForm}
 
           onSubmit={handleSubmit}
-        >
+        ><Heading
+        marginBottom={'15px'}
+        >Sign Up </Heading>
+    
           <label
 
             className={styles.Label}
@@ -118,6 +121,7 @@ const SignUp = () => {
           </label>
           <input
 
+placeholder='Enter UserName'
             className={styles.Input}
             value={userData.userName}
             onChange={handleChange}
@@ -136,6 +140,7 @@ const SignUp = () => {
             className={styles.Input}
             value={userData.email}
             onChange={handleChange}
+            placeholder='Enter Email'
             type="email"
             title="email"
             required
@@ -148,6 +153,7 @@ const SignUp = () => {
             Password
           </label>
           <input
+          placeholder='Enter Password'
             className={styles.Input}
             value={userData.password}
             onChange={handleChange}

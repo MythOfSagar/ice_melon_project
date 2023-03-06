@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Button, useToast } from '@chakra-ui/react'
+import { Button, Heading, useToast } from '@chakra-ui/react'
 import { MyContext, MyContextType, serverUrl } from '@/context/mycontext'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
@@ -10,7 +10,7 @@ const SignIn = () => {
 
   const router = useRouter()
   const toast = useToast()
-  const { data, setData } = useContext<MyContextType>(MyContext);
+  const {setData } = useContext<MyContextType>(MyContext);
 
   const initialData = {
     password: "",
@@ -99,14 +99,18 @@ const SignIn = () => {
       <link rel="icon" href="/favicon.ico" />
     </Head>
       <div
-        className={styles.signUpPage}
 
+        className={styles.signUpPage}
       >
+
         <form
           className={styles.signUpForm}
 
           onSubmit={handleSubmit}
         >
+          <Heading
+            marginBottom={'15px'}
+          >Sign In </Heading>
           <label
 
             className={styles.Label}
@@ -118,6 +122,7 @@ const SignIn = () => {
             className={styles.Input}
             value={userData.userName}
             onChange={handleChange}
+            placeholder='Enter Email'
             type="text"
             title="userName"
             required
@@ -135,6 +140,7 @@ const SignIn = () => {
             className={styles.Input}
             value={userData.password}
             onChange={handleChange}
+            placeholder='Enter Password'
             type="password"
             title="password"
             required
