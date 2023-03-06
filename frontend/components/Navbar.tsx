@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
  import styles from "../styles/Navbar.module.css";
 import { MyContext, MyContextType } from "@/context/mycontext";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { HamburgerIcon,CloseIcon } from '@chakra-ui/icons'
 
 
 
@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
           </Link>
         </div>
         <div className={styles.menuIcon} onClick={handleMenuClick}>
-          {isOpen ? <FaTimes /> : <FaBars />}
+          {isOpen ? <CloseIcon /> : <HamburgerIcon />}
         </div>
         <ul className={`${styles.menu} ${isOpen ? styles.show : ""}`}>
           <li>
