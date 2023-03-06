@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 
-const CreateBlog = () => {
+const WriteBlog = () => {
 
   const router = useRouter()
   const toast = useToast()
@@ -134,4 +134,4 @@ const CreateBlog = () => {
   )
 }
 
-export default CreateBlog
+export default WriteBlog

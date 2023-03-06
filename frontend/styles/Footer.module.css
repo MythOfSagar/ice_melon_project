@@ -1,0 +1,113 @@
+/* Footer container */
+.footer {
+    background-color: pink;
+    color: #333;
+    padding: 40px 0;
+  }
+  
+  /* Footer container with max-width */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  /* Navigation section */
+  .navigation {
+    flex: 1 0 300px;
+  }
+  
+  /* Title of website */
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Navigation links */
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Navigation links items */
+  .item {
+    margin-bottom: 10px;
+  }
+  
+  /* Social media section */
+  .social {
+    flex: 1 0 200px;
+  }
+  
+  /* Social media subtitle */
+  .subtitle {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  /* Social media icons */
+  .icons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  /* Social media icon item */
+  .icon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #333;
+  }
+  
+  /* Newsletter section */
+  .newsletter {
+    flex: 1 0 300px;
+  }
+  
+  /* Newsletter subtitle */
+  .subtitle {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  /* Newsletter form */
+  .form {
+    display: flex;
+  }
+  
+  /* Newsletter input */
+  .input {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+  }
+  
+  /* Newsletter button */
+  .button {
+    background-color: #fff;
+    color: #333;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+  }
+  
+  /* Copyright section */
+  .copy {
+    text-align: center;
+    margin-top: 40px;
+  }
+  

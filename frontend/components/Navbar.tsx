@@ -1,11 +1,17 @@
-import React, { useContext, useEffect } from 'react'
-import Link from 'next/link';
-import { MyContext, MyContextType } from '@/context/mycontext';
-import styles from '../styles/Navbar.module.css'
+import React, { useContext, useEffect, useState } from "react";
+import Link from "next/link";
+ import styles from "../styles/Navbar.module.css";
+import { MyContext, MyContextType } from "@/context/mycontext";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleMenuClick = () => {
+    setIsOpen(!isOpen);
+  };
 
   const { setData, data } = useContext<MyContextType>(MyContext);
 
@@ -18,27 +24,43 @@ const Navbar = () => {
       }
     }
   }, [])
+
   return (
-    <div className={styles.navbar}>
-      <Link href={'/'} legacyBehavior>
-        <a className={styles.logo}>
-          Icon
-        </a>
-      </Link>
+    <nav className={styles.navbar}>
+      <div className={styles.container}>
+        <div className={styles.logo}>
+          <Link href="/" legacyBehavior>
+            <a>Ice Melon</a>
+          </Link>
+        </div>
+        <div className={styles.menuIcon} onClick={handleMenuClick}>
+          {isOpen ? <FaTimes /> : <FaBars />}
+        </div>
+        <ul className={`${styles.menu} ${isOpen ? styles.show : ""}`}>
+          <li>
+            <Link href="/"  legacyBehavior>
+              <a onClick={()=>setIsOpen(false)}>Home</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/writeblog"  legacyBehavior>
+              <a onClick={()=>setIsOpen(false)}>Write Blog</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/signup"  legacyBehavior>
+              <a onClick={()=>setIsOpen(false)}>Sign Up</a>
+            </Link>
+          </li>
+          <li>
+            <Link href={data.token ? '/account' : '/signin'}  legacyBehavior>
+              <a onClick={()=>setIsOpen(false)}>{data.token ? 'Account' : 'Sign In'}</a>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  );
+};
 
-      <Link href={'/createblog'} legacyBehavior>
-        <a className={styles.navLink}>Create New Blog</a>
-      </Link>
-
-      <Link href={'/register'} legacyBehavior>
-        <a className={styles.navLink}>Sign Up</a>
-      </Link>
-
-      <Link href={data.token ? '/account' : '/login'} legacyBehavior>
-        <a className={styles.navLink}>{data.token ? 'Account' : 'Sign In'}</a>
-      </Link>
-    </div>
-  )
-}
-
-export default Navbar
+export default Navbar;

@@ -3,15 +3,11 @@ import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
 import { useState } from 'react';
-import { Blog, dataType, MyContext } from '../context/mycontext'
+import { dataType, MyContext } from '../context/mycontext'
+import Footer from '@/components/Footer';
+
 
 export default function App({ Component, pageProps }: AppProps) {
-
-
-
-
- 
-
 
   const [data, setData] = useState<dataType>({
     userId: null,
@@ -24,6 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <ChakraProvider>
         <Navbar />
         <Component {...pageProps} />
+        <Footer/>
       </ChakraProvider>
     </MyContext.Provider>
   </>)
