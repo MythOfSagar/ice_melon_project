@@ -1,30 +1,40 @@
-import React, { useContext, useState,useEffect } from 'react'
-import { useToast } from '@chakra-ui/react'
+import React, { useContext, useState } from 'react'
+import { Box, useToast } from '@chakra-ui/react'
 import Textarea from "../components/TextArea"
 import Select from "../components/Select"
 import { MyContext, MyContextType, serverUrl } from '@/context/mycontext'
-import { useRouter } from 'next/router'
 import Head from 'next/head'
+import PleaseSignin from '@/components/PleaseSignin'
+
+const todayDate = () => {
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+  const day = String(currentDate.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+
+}
 
 
 const WriteBlog = () => {
 
-  const router = useRouter()
+
   const toast = useToast()
   const { data } = useContext<MyContextType>(MyContext);
 
   const initialData = {
     title: "",
-    date: '2022-10-20',
+    date: todayDate(),
     content: "",
     category: "Tech",
     image: "",
-    favourites:{a:true}
+    
   }
   const options = [
-    { value: 'Tech'},
+    { value: 'Tech' },
     { value: 'Humour' },
-    { value: 'Entertainment'},
+    { value: 'Entertainment' },
     { value: 'Sports' },
     { value: 'Economy' }
   ]
@@ -48,7 +58,7 @@ const WriteBlog = () => {
     event.preventDefault()
 
     console.log(blogData)
- 
+
     await fetch(`${serverUrl}/blogs`, {
       method: "POST",
       mode: "cors",
@@ -65,9 +75,9 @@ const WriteBlog = () => {
           duration: 2500,
           isClosable: true,
         })
-        
-       
-        
+
+
+
       }
       else {
         console.log(response)
@@ -80,25 +90,14 @@ const WriteBlog = () => {
     })
       .catch(error => {
         console.error(error);
-      
+
       });
 
 
   }
 
-    useEffect(() => {
-   if(!data.token)
-   {
-    toast({
-      title: `Please Log In to Create Blog.`,
-      status: 'error',
-      isClosable: true,
-    })
-    router.push('/')
-   } 
-      
-    }, [])
-    
+
+
 
   return (
     <div>
@@ -108,7 +107,9 @@ const WriteBlog = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="form">
+      <Box 
+      width="fit-content" 
+       margin={`100px auto 10px auto`}>{!data.token ? <PleaseSignin /> : <><div className="form">
         <form method="post"
           onSubmit={handleSubmit}
           style={{ width: 'fit-content', display: 'flex', flexDirection: 'column' }}>
@@ -117,7 +118,8 @@ const WriteBlog = () => {
             value={blogData.title}
             onChange={handleChange}
             type="text"
-            title="title" />
+            title="title" 
+            required/>
           <label>Category:</label>
           <Select
             value={blogData.category}
@@ -127,9 +129,10 @@ const WriteBlog = () => {
           <Textarea
             value={blogData.content}
             onChange={handleContentChange} />
-          <button type="submit">Submit</button>
+          <button type="submit">Finalize</button>
         </form>
-      </div>
+      </div></>}</Box>
+
     </div>
   )
 }

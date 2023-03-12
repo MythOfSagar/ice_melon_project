@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react';
 import { Blog, serverUrl } from '@/context/mycontext';
 import BlogCard from '@/components/BlogCard';
 import Filter from '@/components/Filter'
+import { Box } from '@chakra-ui/react'
+import styles from '../styles/Home.module.css'
+
 
 type staticBlogsProps = {
   staticBlogs: Blog[]
@@ -37,12 +40,13 @@ export default function Home({ staticBlogs }: staticBlogsProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
+      <Box 
+      width="fit-content" 
+       margin={`100px auto 10px auto`}>
         <><Filter handleCategory={(category) => setCategory(category)}></Filter></>
+        <div className={styles.AllBlogs}>
         {stateBlogs.map(((blog, i) => (
           <BlogCard
-
-
             category={blog.category}
             content={blog.content}
             date={blog.date}
@@ -50,8 +54,8 @@ export default function Home({ staticBlogs }: staticBlogsProps) {
             username={blog.userName}
             key={i}
             _id={blog._id}
-          ></BlogCard>)))}
-      </div>
+          ></BlogCard>)))}</div>
+      </Box>
     </>
   )
 }

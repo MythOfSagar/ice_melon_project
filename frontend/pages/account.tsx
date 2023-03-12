@@ -18,6 +18,7 @@ import {
 } from '@chakra-ui/react'
 
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons'
+import stylesBlogsDiv from '../styles/Home.module.css'
 
 import { Textarea } from "@chakra-ui/react"
 import Select from "../components/Select"
@@ -166,14 +167,23 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
         'Content-Type': 'application/json',
         "authorization": `${data.token}`
       }
-    }).then(res => console.log("Deleted from Your Blogs"))
+    }).then(res =>toast({
+      title: `Blog Deletion Successfull.`,
+      status: 'success',
+      isClosable: true,
+    })
+    ).catch((err)=>toast({
+      title: `Error Occured Please Try Again.`,
+      status: 'error',
+      isClosable: true,
+    }))
   }
 
   useEffect(() => {
 
     if (category !== 'Select Category') {
       setStateBlogs(staticBlogs.filter((blog: Blog) => blog.category === category))
-      console.log("v")
+  
     } else {
       setStateBlogs(staticBlogs)
       console.log("bb")
@@ -243,8 +253,11 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
             </ModalContent>
           </Modal>
         </>
+        <Box 
+      width="fit-content" 
+       margin={`100px auto 10px auto`}>
         <><Filter handleCategory={(category) => setCategory(category)}></Filter></>
-        <div style={{width:'fit-content'}}>
+        <div className={stylesBlogsDiv.AllBlogs}>
           {stateBlogs.map(((blog, i) => {
             if (blog.creator === data.userId) return <div key={i}><BlogCard
               category={blog.category}
@@ -282,7 +295,7 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
             </div>
           }
           ))}
-        </div>
+        </div></Box>
         <div>
           <Button onClick={LogOut}>LogOut</Button>
         </div></>
