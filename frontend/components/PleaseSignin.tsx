@@ -10,7 +10,7 @@ const PleaseSignin = () => {
         title='Click to Sign In'
         alt={"Sign In"}
         src={"https://i.ibb.co/6tCY2V0/CIMG.png"}
-        width={850}
+        width={1100}
         height={200}
       />
     </Link>
