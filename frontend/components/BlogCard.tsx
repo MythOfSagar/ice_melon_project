@@ -45,7 +45,7 @@ const BlogCard = (BlogCardProp: BlogCardProps) => {
                 </div>
                 <div className={styles.detailsContainer}>
                     <div className={styles.username}>{username}</div>
-                    <div className={styles.title}>{title}</div>
+                    <div className={styles.title}>{title.length>40 ? title.substring(0,35)+'...' : title}</div>
                     <div className={styles.content}>{briefContent}</div>
                     <div className={styles.categoryDate}>
                         <div className={styles.category}>{category}</div>
