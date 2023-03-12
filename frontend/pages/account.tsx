@@ -189,7 +189,7 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
       console.log("bb")
     }
 
-  }, [category])
+  }, [category,staticBlogs])
 
   return (
     <>

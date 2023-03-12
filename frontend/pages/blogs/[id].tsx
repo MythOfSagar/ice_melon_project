@@ -14,7 +14,7 @@ interface blogProps {
 export default function BlogPage({ blog }: blogProps) {
     const router = useRouter();
 
-    let blogContent = blog.content.split(".")
+    let blogContent = blog ? blog.content.split(".") : []
 
     let blogContentPara = []
     let para = ""

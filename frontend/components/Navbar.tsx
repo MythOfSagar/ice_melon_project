@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
         setData(JSON.parse(iceMelonUser))
       }
     }
-  }, [])
+  }, [setData])
 
   return (
     <nav className={styles.navbar}>
