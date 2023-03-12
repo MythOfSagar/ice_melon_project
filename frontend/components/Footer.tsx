@@ -13,19 +13,19 @@ const Footer: React.FC = () => {
           <nav>
             <ul className={styles.list}>
               <li className={styles.item}>
-                <Link href="https://github.com/Sagar1079/ice_melon_project" legacyBehavior>
+                
                   <a>About Us</a>
-                </Link>
+               
               </li>
               <li className={styles.item}>
-                <Link href="https://github.com/Sagar1079/ice_melon_project" legacyBehavior>
+                
                   <a>Contact</a>
-                </Link>
+               
               </li>
               <li className={styles.item}>
-                <Link href="https://github.com/Sagar1079/ice_melon_project" legacyBehavior>
+                
                   <a>Privacy Policy</a>
-                </Link>
+               
               </li>
             </ul>
           </nav>
@@ -34,17 +34,17 @@ const Footer: React.FC = () => {
           <h3 className={styles.subtitle}>Follow Us</h3>
           <ul className={styles.icons}>
             <li className={styles.icon}>
-              <a href="https://github.com/Sagar1079/ice_melon_project">
+              <a target='_blank' href="https://github.com/Sagar1079/ice_melon_project">
                 <Icon as={FaTwitter} />
               </a>
             </li>
             <li className={styles.icon}>
-              <a href="https://github.com/Sagar1079/ice_melon_project">
+              <a target='_blank' href="https://github.com/Sagar1079/ice_melon_project">
                 <Icon as={FaFacebook} />
               </a>
             </li>
             <li className={styles.icon}>
-              <a href="https://github.com/Sagar1079/ice_melon_project">
+              <a target='_blank' href="https://github.com/Sagar1079/ice_melon_project">
                 <Icon as={FaInstagram} />
               </a>
             </li>

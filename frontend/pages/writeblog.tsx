@@ -5,7 +5,8 @@ import Select from "../components/Select"
 import { MyContext, MyContextType, serverUrl } from '@/context/mycontext'
 import Head from 'next/head'
 import PleaseSignin from '@/components/PleaseSignin'
- 
+import Image from 'next/image'
+
 const todayDate = () => {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
@@ -40,6 +41,7 @@ const WriteBlog = () => {
   ]
 
   const [blogData, setBlogData] = useState(initialData)
+  const [writing,setWriting]=useState(false)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { title, value } = event.target
@@ -56,7 +58,7 @@ const WriteBlog = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-
+    setWriting(true)
     console.log(blogData)
 
     await fetch(`${serverUrl}/blogs`, {
@@ -69,6 +71,7 @@ const WriteBlog = () => {
       body: JSON.stringify(blogData),
     }).then(response => {
       if (response.ok) {
+        setWriting(false)
         toast({
           title: 'Blog Posted, will be live within few seconds.',
           status: 'success',
@@ -80,7 +83,7 @@ const WriteBlog = () => {
 
       }
       else {
-        console.log(response)
+        setWriting(false)
         toast({
           title: `Error Occured Please Try Again.`,
           status: 'error',
@@ -89,7 +92,12 @@ const WriteBlog = () => {
       }
     })
       .catch(error => {
-        console.error(error);
+        setWriting(false)
+        toast({
+          title: `Error Occured Please Try Again.`,
+          status: 'error',
+          isClosable: true,
+        })
 
       });
 
@@ -109,7 +117,14 @@ const WriteBlog = () => {
       </Head>
       <Box 
       width="fit-content" 
-       margin={`100px auto 10px auto`}>{!data.token ? <PleaseSignin /> : <><div className="form">
+       margin={`100px auto 10px auto`}>{!data.token ? <PleaseSignin /> : writing ? <Image
+     
+       alt={'writing'}
+       src={'https://i.ibb.co/W0MDPZ2/write-Cute.gif'}
+       width={350}
+       height={200}
+   /> 
+       : <><div className="form">
         <form method="post"
           onSubmit={handleSubmit}
           style={{ width: 'fit-content', display: 'flex', flexDirection: 'column' }}>
