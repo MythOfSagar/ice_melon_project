@@ -23,10 +23,8 @@ import stylesBlogsDiv from '../styles/Home.module.css'
 import { Textarea } from "@chakra-ui/react"
 import Select from "../components/Select"
 import Filter from '@/components/Filter';
-type Option = {
-  value: string;
-  label: string;
-}
+import Profile from '@/components/Profile';
+
 
 type staticBlogsProps = {
   staticBlogs: Blog[]
@@ -68,16 +66,10 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
 
   const handleSubmit = async () => {
 
-    console.log(currentBlog)
+
     setLoading(true)
 
-    setStateBlogs(stateBlogs.map((blog: Blog) => {
 
-      if (blog._id === currentBlog._id) {
-        return currentBlog
-      }
-      return blog
-    }))
 
     await fetch(`${serverUrl}/blogs/edit/${currentBlog._id}`, {
       method: "PATCH",
@@ -95,6 +87,13 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
           duration: 2500,
           isClosable: true,
         })
+        setStateBlogs(stateBlogs.map((blog: Blog) => {
+
+          if (blog._id === currentBlog._id) {
+            return currentBlog
+          }
+          return blog
+        }))
         setLoading(false)
 
       }
@@ -131,22 +130,14 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
     { value: 'Economy' }
   ]
 
-  const router = useRouter();
-  const { data, setData } = useContext<MyContextType>(MyContext);
-  const [stateBlogs, setStateBlogs] = useState<Blog[]>(staticBlogs)
+
+  const { data } = useContext<MyContextType>(MyContext);
+  const [stateBlogs, setStateBlogs] = useState<Blog[]>(staticBlogs
+    .filter((blog: Blog) => blog.creator === data.userId))
+
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
-
-
-
-  const LogOut = () => {
-    setData({ token: null, userId: null })
-    if (typeof window !== 'undefined') {
-      router.push('/')
-      localStorage.clear()
-    }
-  }
 
 
   const handleEdit = (blogId: string) => {
@@ -167,12 +158,12 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
         'Content-Type': 'application/json',
         "authorization": `${data.token}`
       }
-    }).then(res =>toast({
+    }).then(res => toast({
       title: `Blog Deletion Successfull.`,
       status: 'success',
       isClosable: true,
     })
-    ).catch((err)=>toast({
+    ).catch((err) => toast({
       title: `Error Occured Please Try Again.`,
       status: 'error',
       isClosable: true,
@@ -180,16 +171,16 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
   }
 
   useEffect(() => {
-
     if (category !== 'Select Category') {
-      setStateBlogs(staticBlogs.filter((blog: Blog) => blog.category === category))
-  
-    } else {
-      setStateBlogs(staticBlogs)
-      console.log("bb")
-    }
+      setStateBlogs(staticBlogs.filter((blog: Blog) => blog.category === category && blog.creator === data.userId))
 
-  }, [category,staticBlogs])
+    } else {
+      setStateBlogs(staticBlogs.filter((blog: Blog) => blog.creator === data.userId))
+
+    }
+  }, [category, staticBlogs])
+
+
 
   return (
     <>
@@ -253,13 +244,13 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
             </ModalContent>
           </Modal>
         </>
-        <Box 
-      width="fit-content" 
-       margin={`100px auto 10px auto`}>
-        <><Filter handleCategory={(category) => setCategory(category)}></Filter></>
-        <div className={stylesBlogsDiv.AllBlogs}>
-          {stateBlogs.map(((blog, i) => {
-            if (blog.creator === data.userId) return <div key={i}><BlogCard
+        <Box
+          width="fit-content"
+          margin={`100px auto 10px auto`}>
+          <Profile />
+          <><Filter handleCategory={(category) => setCategory(category)}></Filter></>
+          <div className={stylesBlogsDiv.AllBlogs}>
+            {stateBlogs.map(((blog, i) => (<div key={i}><BlogCard
               category={blog.category}
               content={blog.content}
               date={blog.date}
@@ -268,37 +259,33 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
               key={i}
               _id={blog._id}
             ></BlogCard>
-            <Box 
-             display={'flex'}
-             gap={7}
-           
-            width={'fit-content'}
-            margin='auto'
-            >
-              <Button
-                type="submit"
-                backgroundColor={'#4caf50'}
-                marginTop={'12px'}
-                colorScheme={'telegram'}
-                color={'#fff'}
-                leftIcon={<EditIcon />}
-                onClick={() => handleEdit(blog._id)}>Edit</Button>
-              <Button
-                type="submit"
-                backgroundColor={'#4caf50'}
-                marginTop={'12px'}
-                colorScheme={'telegram'}
-                color={'#fff'}
-                leftIcon={<DeleteIcon />}
-                onClick={() => handleDelete(blog._id)}>Delete</Button>
-                </Box>
-            </div>
-          }
-          ))}
-        </div></Box>
-        <div>
-          <Button onClick={LogOut}>LogOut</Button>
-        </div></>
+              <Box
+                display={'flex'}
+                gap={7}
+                width={'fit-content'}
+                margin='auto'
+              >
+                <Button
+                  type="submit"
+                  backgroundColor={'#4caf50'}
+                  marginTop={'12px'}
+                  colorScheme={'telegram'}
+                  color={'#fff'}
+                  leftIcon={<EditIcon />}
+                  onClick={() => handleEdit(blog._id)}>Edit</Button>
+                <Button
+                  type="submit"
+                  backgroundColor={'#4caf50'}
+                  marginTop={'12px'}
+                  colorScheme={'telegram'}
+                  color={'#fff'}
+                  leftIcon={<DeleteIcon />}
+                  onClick={() => handleDelete(blog._id)}>Delete</Button>
+              </Box>
+            </div>)
+            ))}
+          </div></Box>
+      </>
     </>
 
   )

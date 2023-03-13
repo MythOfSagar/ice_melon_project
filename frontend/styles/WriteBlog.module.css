@@ -1,0 +1,61 @@
+.Form {
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    max-width: 80%;
+    margin: 100px auto 10px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+
+.Label {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.Input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-bottom: 20px;
+
+}
+
+.Position{
+
+    width: fit-content;
+    margin: 100px auto 10px auto;
+
+}
+
+.Select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-bottom: 20px;
+
+}
+
+
+.TextArea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-bottom: 20px;
+    
+    height: 210px;
+}
+
+
+.Button {
+    padding: 10px;
+    border-radius: 5px;
+font-weight: bold;
+    background-color: #2ecc71;
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+}

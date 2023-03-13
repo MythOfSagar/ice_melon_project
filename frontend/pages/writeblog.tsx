@@ -6,6 +6,8 @@ import { MyContext, MyContextType, serverUrl } from '@/context/mycontext'
 import Head from 'next/head'
 import PleaseSignin from '@/components/PleaseSignin'
 import Image from 'next/image'
+import styles from '../styles/WriteBlog.module.css'
+
 
 const todayDate = () => {
   const currentDate = new Date();
@@ -116,35 +118,39 @@ const WriteBlog = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Box 
-      width="fit-content" 
-       margin={`100px auto 10px auto`}>{!data.token ? <PleaseSignin /> : writing ? <Image
-     
+     >{!data.token ? <div className={styles.Position}><PleaseSignin /></div>
+         : writing ? <div className={styles.Position}><Image
        alt={'writing'}
        src={'https://i.ibb.co/W0MDPZ2/write-Cute.gif'}
        width={350}
        height={200}
-   /> 
+   /> </div>
        : <><div className="form">
         <form method="post"
           onSubmit={handleSubmit}
-          style={{ width: 'fit-content', display: 'flex', flexDirection: 'column' }}>
-          <label>Title:</label>
+          className={styles.Form}>
+          <label className={styles.Label}>Title:</label>
           <input
+          placeholder='Enter Blog Title'
             value={blogData.title}
             onChange={handleChange}
             type="text"
             title="title" 
+            className={styles.Input}
             required/>
-          <label>Category:</label>
+          <label className={styles.Label}>Select Category:</label>
           <Select
             value={blogData.category}
             onChange={handleSelectChange}
             options={options} />
-          <label >Content:</label>
+          <label  className={styles.Label}>Content:</label>
           <Textarea
+            placeholder='Start writing here...'
             value={blogData.content}
             onChange={handleContentChange} />
-          <button type="submit">Finalize</button>
+          <button 
+          className={styles.Button}
+          type="submit">Finalize Blog</button>
         </form>
       </div></>}</Box>
 
