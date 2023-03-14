@@ -30,7 +30,7 @@ const Filter = ({handleCategory}:Props) => {
 
     return (
         <div className={styles.div}>
-            <label className={styles.label}>Choose your favourite Category:</label>
+            <label className={styles.label}>Choose your favourite Category :</label>
             <Select className={styles.Select}
                 value={category}
                 onChange={handleSelectChange}

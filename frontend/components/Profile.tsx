@@ -21,18 +21,20 @@ const Profile = () => {
     <div className={styles.container}>
       {/* Cover Photo */}
       <div className={styles.coverPhoto}>
-        <Image
-          src="https://i.ibb.co/WPh4Zqg/ABhi.png"
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJCsloaZ5KELcnt7DHHHVcoEuaUuR05B7XdpfRAKLUrz8C5d7aI67hEo1Pjs74hylGqdo&usqp=CAU"
           alt="Cover photo"
-          width={356}
-            height={128}
+          style={{
+            "width":"100%",
+              "height":"400px", 
+          }}
         />
       </div>
       {/* Profile Photo */}
       <div className={styles.profilePhotoContainer}>
         <div className={styles.profilePhotoBorder}>
-          <Image
-            src="https://i.ibb.co/WPh4Zqg/ABhi.png"
+          <img
+            src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=600"
             width={556}
             height={556}
             alt="Profile photo"

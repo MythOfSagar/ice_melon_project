@@ -48,8 +48,6 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
 
   const [category, setCategory] = useState<string>('Select Category')
 
-
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { title, value } = event.target
     setCurrentBlog({ ...currentBlog, [title]: value })
@@ -119,7 +117,6 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
 
     onClose()
   }
-
 
 
   const options = [
@@ -192,9 +189,6 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
       </Head>
       <>
         <>
-
-
-
           <Modal
             initialFocusRef={initialRef}
             finalFocusRef={finalRef}
@@ -225,7 +219,6 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
                     <Textarea
                       value={currentBlog.content}
                       onChange={handleContentChange} />
-
                   </form>
                 </div>
               </ModalBody>
@@ -244,14 +237,16 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
             </ModalContent>
           </Modal>
         </>
+
         <Box
           width="fit-content"
-          margin={`100px auto 10px auto`}>
+          margin={"auto"}
+          mt={"100px"}
+          >
           <Profile />
           <><Filter handleCategory={(category) => setCategory(category)}></Filter></>
           <div className={stylesBlogsDiv.AllBlogs}>
-            {stateBlogs.map(((blog, i) => (<div key={i}><BlogCard
-              category={blog.category}
+            {stateBlogs.map(((blog, i) => (<div key={i}><BlogCard category={blog.category}
               content={blog.content}
               date={blog.date}
               title={blog.title}
@@ -264,7 +259,7 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
                 gap={7}
                 width={'fit-content'}
                 margin='auto'
-              >
+                mt={"30px"}>
                 <Button
                   type="submit"
                   backgroundColor={'#4caf50'}
@@ -284,7 +279,8 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
               </Box>
             </div>)
             ))}
-          </div></Box>
+          </div>
+          </Box>
       </>
     </>
 
