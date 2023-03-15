@@ -2,21 +2,15 @@
 Ice Melon Blogging website has multi-user features with CRUD functionalities.
 <br><br>
 <h3 align="left">TechStacks:</h3>
-<p align="left">
-    <img src="https://www.rlogical.com/wp-content/uploads/2021/08/Rlogical-Blog-Images-thumbnail.png" alt="nextjs"
-        width="40" height="40" />
-    <img src="https://profilinator.rishav.dev/skills-assets/typescript-original.svg" alt="TypeScript" width="40"
-        height="40" />
-    <img src="https://user-images.githubusercontent.com/25181517/190887639-d0ba4ec9-ddbe-45dd-bea1-4db83846503e.png"
-        alt="chakra" width="40" height="40" />
-    <img src="https://profilinator.rishav.dev/skills-assets/nodejs-original-wordmark.svg" alt="Node.js" width="40"
-        height="40" />
-    <img src="https://skillshack.blob.core.windows.net/uploads/express.webp" alt="Express.js" width="40" height="40" />
-    <img src="https://profilinator.rishav.dev/skills-assets/mongodb-original-wordmark.svg" alt="MongoDB" width="40"
-        height="40" />
-    <img src="https://user-images.githubusercontent.com/25181517/121401671-49102800-c959-11eb-9f6f-74d49a5e1774.png"
-        alt="npm" width="40" height="40" />
-</p><br />
+<div align='center' style="display: flex;" >
+    <img src="https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white" />
+    <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" />
+    <img src="https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white" />
+    <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" />
+    <img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge" />
+    <img src="https://img.shields.io/badge/MongoDB-2e542d?style=for-the-badge&logo=mongodb&logoColor=white" />
+    <img src="https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens" />
+  </div><br />
 
 
 <blockquote>Frontend Deoployed on</blockquote>
