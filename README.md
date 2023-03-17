@@ -28,7 +28,7 @@ Ice Melon Blogging website has multi-user features with CRUD functionalities.
 <br>
 
 # Features
-- SignUP / SignIN
+- Signup / Signin
 - Blogs are filtered by their category
 - Authenticated user can write a Blog
 - Authenticated user can edit and delete own's Blog.
@@ -54,7 +54,7 @@ Ice Melon Blogging website has multi-user features with CRUD functionalities.
 <br>
 
 
-<blockquote>Login Page</blockquote>
+<blockquote>SignIn Page</blockquote>
 <br>
 <img src="https://i.ibb.co/yR2b0rc/IC.png" alt="Log In"
     border="0" />
