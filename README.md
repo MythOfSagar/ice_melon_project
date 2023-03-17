@@ -27,8 +27,8 @@ Ice Melon Blogging website has multi-user features with CRUD functionalities.
 <img src="https://img.shields.io/badge/Render-FE3B7.svg?style=for-the-badge&logo=render&logoColor=black" alt="Render"/>
 <br>
 
-# features
-- Signin / Signup
+# Features
+- SignUP / SignIN
 - Blogs are filtered by their category
 - Authenticated user can write a Blog
 - Authenticated user can edit and delete own's Blog.
