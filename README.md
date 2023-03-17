@@ -16,14 +16,14 @@ Ice Melon Blogging website has multi-user features with CRUD functionalities.
 
 
 <blockquote>Frontend Deoployed on</blockquote>
-<br>
+
 <a href="https://ice-melon.vercel.app" target='_blank'>
 <img src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel"  />
 </a>
 <br>
 
 <blockquote>Backend Deoployed on</blockquote>
-<br>
+
 <img src="https://img.shields.io/badge/Render-FE3B7.svg?style=for-the-badge&logo=render&logoColor=black" alt="Render"/>
 <br>
 
