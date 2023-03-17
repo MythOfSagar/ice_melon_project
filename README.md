@@ -36,7 +36,7 @@ Ice Melon Blogging website has multi-user features with CRUD functionalities.
 # Screenshots
 <blockquote>Home Page</blockquote>
 <br>
-<img src="https://i.ibb.co/nz5sTZZ/Account-Ice.png" alt="Home"
+<img src="https://i.ibb.co/Gt9pS8q/Account-Ice.png" alt="Home"
     border="0" />
 
 <br>
