@@ -36,14 +36,14 @@ Ice Melon Blogging website has multi-user features with CRUD functionalities.
 # Screenshots
 <blockquote>Home Page</blockquote>
 <br>
-<img src="https://i.ibb.co/3Nm82y9/IC.png" alt="Home"
+<img src="https://i.ibb.co/nz5sTZZ/Account-Ice.png" alt="Home"
     border="0" />
 
 <br>
 
 <blockquote>Account Page</blockquote>
 <br>
-<img src="https://i.ibb.co/2PsfQfG/IC.png" alt="Account"
+<img src="https://i.ibb.co/44rkzgz/Account-Ice.png" alt="Account"
     border="0" />
 <br>
 
