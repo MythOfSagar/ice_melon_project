@@ -9,6 +9,10 @@
   z-index: 100;
 
 }
+.Logo{
+  width: 140px;
+  cursor: pointer;
+}
 
 .container {
   width: 80%;

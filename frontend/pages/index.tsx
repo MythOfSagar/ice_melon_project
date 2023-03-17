@@ -13,9 +13,6 @@ type staticBlogsProps = {
 
 export default function Home({ staticBlogs }: staticBlogsProps) {
 
-
-
-
   const [stateBlogs, setStateBlogs] = useState<Blog[]>(staticBlogs)
   const [category, setCategory] = useState<string>('Select Category')
 
@@ -41,8 +38,10 @@ export default function Home({ staticBlogs }: staticBlogsProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Box 
-      width="fit-content" 
-       margin={`100px auto 10px auto`}>
+      width="fit-content"
+      border={'1px solid transparent'}
+       margin={`10px auto 10px auto`}>
+        
         <><Filter handleCategory={(category) => setCategory(category)}></Filter></>
         <div className={styles.AllBlogs}>
         {stateBlogs.map(((blog, i) => (

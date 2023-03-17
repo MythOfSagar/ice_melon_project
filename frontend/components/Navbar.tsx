@@ -30,7 +30,7 @@ const Navbar: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.logo}>
           <Link href="/" legacyBehavior>
-            <a>Ice Melon</a>
+           <img className={styles.Logo}  src="https://i.ibb.co/YNjKSNc/IM-Logo.png" alt="" />
           </Link>
         </div>
         <div className={styles.menuIcon} onClick={handleMenuClick}>

@@ -1,5 +1,3 @@
-
-import { useRouter } from 'next/router';
 import Head from 'next/head'
 import React, { useContext, useEffect, useState } from 'react';
 import { Blog, MyContext, MyContextType, serverUrl } from '@/context/mycontext';
@@ -32,6 +30,20 @@ type staticBlogsProps = {
 
 export default function Account({ staticBlogs }: staticBlogsProps) {
 
+  const toast = useToast()
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const { data } = useContext<MyContextType>(MyContext);
+
+  const initialRef = React.useRef(null)
+  const finalRef = React.useRef(null)
+
+
+  const [loading, setLoading] = useState(false)
+  const [category, setCategory] = useState<string>('Select Category')
+  const [displayCategory, setDisplayCategory] = useState<boolean>(false)
+  const [stateBlogs, setStateBlogs] = useState<Blog[]>(staticBlogs
+    .filter((blog: Blog) => blog.creator === data.userId))
   const [currentBlog, setCurrentBlog] = useState<Blog>({
     title: "",
     date: "",
@@ -42,11 +54,7 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
     favourites: {},
     _id: ""
   })
-  const [loading, setLoading] = useState(false)
 
-  const toast = useToast()
-
-  const [category, setCategory] = useState<string>('Select Category')
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { title, value } = event.target
@@ -64,10 +72,7 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
 
   const handleSubmit = async () => {
 
-
     setLoading(true)
-
-
 
     await fetch(`${serverUrl}/blogs/edit/${currentBlog._id}`, {
       method: "PATCH",
@@ -128,25 +133,15 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
   ]
 
 
-  const { data } = useContext<MyContextType>(MyContext);
-  const [stateBlogs, setStateBlogs] = useState<Blog[]>(staticBlogs
-    .filter((blog: Blog) => blog.creator === data.userId))
-
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const initialRef = React.useRef(null)
-  const finalRef = React.useRef(null)
-
 
   const handleEdit = (blogId: string) => {
-
     setCurrentBlog(stateBlogs.filter((blog) => blog._id === blogId)[0])
-
     onOpen()
   }
+
+
   const handleDelete = async (blogId: string) => {
-
     setStateBlogs(stateBlogs.filter((blog: Blog) => blog._id !== blogId))
-
 
     await fetch(`${serverUrl}/blogs/delete/${blogId}`, {
       method: 'DELETE',
@@ -167,15 +162,25 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
     }))
   }
 
+  useEffect((
+  ) => {
+    staticBlogs
+      .forEach((blog: Blog) => {
+        if (blog.creator === data.userId) {
+          setDisplayCategory(true)
+          return
+        }
+      })
+  }, [data])
+
   useEffect(() => {
     if (category !== 'Select Category') {
       setStateBlogs(staticBlogs.filter((blog: Blog) => blog.category === category && blog.creator === data.userId))
 
     } else {
       setStateBlogs(staticBlogs.filter((blog: Blog) => blog.creator === data.userId))
-
     }
-  }, [category, staticBlogs])
+  }, [category, data, staticBlogs])
 
 
 
@@ -240,13 +245,14 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
 
         <Box
           width="fit-content"
-          margin={"auto"}
-          mt={"100px"}
-          >
+
+          margin={`80px auto 10px auto`}
+        >
           <Profile />
-          <><Filter handleCategory={(category) => setCategory(category)}></Filter></>
+          <>{displayCategory ? <Filter handleCategory={(category) => setCategory(category)}></Filter> : <></>}</>
           <div className={stylesBlogsDiv.AllBlogs}>
-            {stateBlogs.map(((blog, i) => (<div key={i}><BlogCard category={blog.category}
+            {stateBlogs.map(((blog, i) => (<div key={i}>
+              <BlogCard category={blog.category}
               content={blog.content}
               date={blog.date}
               title={blog.title}
@@ -280,7 +286,7 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
             </div>)
             ))}
           </div>
-          </Box>
+        </Box>
       </>
     </>
 

@@ -1,5 +1,4 @@
 import { MyContext, MyContextType } from "@/context/mycontext";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import styles from '../styles/Profile.module.css'
@@ -7,10 +6,10 @@ import styles from '../styles/Profile.module.css'
 const Profile = () => {
 
     const router = useRouter();
-    const { setData } = useContext<MyContextType>(MyContext);
+    const { setData ,data} = useContext<MyContextType>(MyContext);
 
     const LogOut = () => {
-        setData({ token: null, userId: null })
+        setData({ token: null, userId: null,userName:null })
         if (typeof window !== 'undefined') {
           router.push('/')
           localStorage.clear()
@@ -22,19 +21,15 @@ const Profile = () => {
       {/* Cover Photo */}
       <div className={styles.coverPhoto}>
         <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJCsloaZ5KELcnt7DHHHVcoEuaUuR05B7XdpfRAKLUrz8C5d7aI67hEo1Pjs74hylGqdo&usqp=CAU"
+          src="https://i.ibb.co/VSXtCmT/Account-COVER.png"
           alt="Cover photo"
-          style={{
-            "width":"100%",
-              "height":"400px", 
-          }}
         />
       </div>
       {/* Profile Photo */}
       <div className={styles.profilePhotoContainer}>
         <div className={styles.profilePhotoBorder}>
           <img
-            src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=600"
+            src="https://i.ibb.co/Rvg1KvB/Cat-Profile.png"
             width={556}
             height={556}
             alt="Profile photo"
@@ -42,6 +37,7 @@ const Profile = () => {
         </div>
       </div>
       {/* Buttons */}
+      <h1 className={styles.userName}>{data.userName}</h1>
       <div className={styles.buttonsContainer}>
         <button 
         onClick={()=>router.push('/writeblog')} 

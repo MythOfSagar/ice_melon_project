@@ -17,12 +17,14 @@ Ice Melon Blogging website has multi-user features with CRUD functionalities.
 
 <blockquote>Frontend Deoployed on</blockquote>
 <br>
-<img src="https://i.ibb.co/2KY1Fr1/Vercel.png" alt="Vercel" width="40" height="40" />
+<a href="https://ice-melon.vercel.app" target='_blank'>
+<img src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" width="40" height="40" />
+</a>
 <br>
 
 <blockquote>Backend Deoployed on</blockquote>
 <br>
-<img src="https://i.ibb.co/BNmdHcW/Render.png" alt="Render" width="40" height="40" />
+<img src="https://img.shields.io/badge/Render-FE3B7.svg?style=for-the-badge&logo=render&logoColor=black" alt="Render" width="40" height="40" />
 <br>
 
 # features
@@ -58,4 +60,4 @@ Ice Melon Blogging website has multi-user features with CRUD functionalities.
     border="0" />
 <br>
 
-# Thankyou
+# ThankYou

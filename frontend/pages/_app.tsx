@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
   })
 
 
-  return (<>
+  return (<div className='Body'>
     <MyContext.Provider value={{ data, setData }}>
       <ChakraProvider>
         <Navbar />
@@ -23,5 +23,5 @@ export default function App({ Component, pageProps }: AppProps) {
         <Footer/>
       </ChakraProvider>
     </MyContext.Provider>
-  </>)
+  </div>)
 }

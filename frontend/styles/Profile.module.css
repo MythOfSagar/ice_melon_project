@@ -5,7 +5,14 @@
     margin: auto;
     /* border: 1px solid; */
   }
+  .userName{
+    font-size:35px
+  }
+
+ 
   
+ 
+
   .coverPhoto {
     display: flex;
     margin: auto;
@@ -13,13 +20,14 @@
     align-items: center;
     text-align: center;
     position: relative;
-    filter: blur(2px);
-    -webkit-filter: blur(2px)
+    width: 100%;
   }
-  
+  .coverPhoto img{
+    width: 100%;
+  }
   .profilePhotoContainer {
     position: relative;
-    margin-top: -20rem;
+    margin-top: -5rem;
   }
   
   .profilePhotoBorder {
@@ -29,6 +37,7 @@
     border: 0.4rem solid white;
     overflow: hidden;
   }
+  
   
   .buttonsContainer {
     position: relative;
@@ -51,4 +60,20 @@
     border: 0.1rem solid black;
     border-radius: 0.5rem;
   }
-  
+
+  @media (max-width: 768px) {
+    .userName{
+      font-size:30px
+    }
+  }
+
+  @media (max-width: 430px) {
+    .userName{
+      font-size:26px
+    }
+    .buttonsContainer {
+      
+      flex-direction: column;
+     
+    }
+  }
