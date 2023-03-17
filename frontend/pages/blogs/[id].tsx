@@ -41,6 +41,8 @@ export default function BlogPage({ blog }: blogProps) {
             <Heading
                 margin={'auto'}
                 width={'fit-content'}
+                mb={"30px"}
+            
             >{blog.title}</Heading>
             <Box
                 margin={'auto'}
@@ -49,8 +51,11 @@ export default function BlogPage({ blog }: blogProps) {
                     className={styles.Image}
                     alt={blog.category}
                     src={chooseImage(blog.category)}
-                    width={350}
+                    width={700}
                     height={200}
+                    style={{
+                        marginBottom:"30px"
+                    }}
                 ></Image></Box>
             {blogContentPara.map((content,i) => {
 
