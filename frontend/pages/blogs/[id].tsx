@@ -59,7 +59,7 @@ export default function BlogPage({ blog }: blogProps) {
                 ></Image></Box>
             {blogContentPara.map((content,i) => {
 
-                return (<div key={i}><Text>{content}</Text></div>)
+                return (<div key={i}><Text fontSize={20}>{content}</Text></div>)
             })}
 
         </div>
