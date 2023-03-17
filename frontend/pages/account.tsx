@@ -171,7 +171,7 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
           return
         }
       })
-  }, [data])
+  }, [data,staticBlogs])
 
   useEffect(() => {
     if (category !== 'Select Category') {

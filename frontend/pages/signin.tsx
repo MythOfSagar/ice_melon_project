@@ -57,7 +57,7 @@ const SignIn = () => {
           isClosable: true,
         })
         setLoading(false)
-        router.push('/')
+        router.push('/account')
       } else if (response.status === 401) {
         toast({
           title: `Wrong Password`,

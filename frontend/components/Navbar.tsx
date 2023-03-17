@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
- import styles from "../styles/Navbar.module.css";
+import styles from "../styles/Navbar.module.css";
 import { MyContext, MyContextType } from "@/context/mycontext";
-import { HamburgerIcon,CloseIcon } from '@chakra-ui/icons'
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
+import Image from "next/image";
 
 
 
@@ -30,7 +31,14 @@ const Navbar: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.logo}>
           <Link href="/" legacyBehavior>
-           <img className={styles.Logo}  src="https://i.ibb.co/YNjKSNc/IM-Logo.png" alt="" />
+            <Image
+              className={styles.Logo}
+              alt={'Logo'}
+              src={'https://i.ibb.co/YNjKSNc/IM-Logo.png'}
+              width={140}
+              height={50}
+            />
+
           </Link>
         </div>
         <div className={styles.menuIcon} onClick={handleMenuClick}>
@@ -38,23 +46,23 @@ const Navbar: React.FC = () => {
         </div>
         <ul className={`${styles.menu} ${isOpen ? styles.show : ""}`}>
           <li>
-            <Link href="/"  legacyBehavior>
-              <a onClick={()=>setIsOpen(false)}>Home</a>
+            <Link href="/" legacyBehavior>
+              <a onClick={() => setIsOpen(false)}>Home</a>
             </Link>
           </li>
           <li>
-            <Link href="/writeblog"  legacyBehavior>
-              <a onClick={()=>setIsOpen(false)}>Write Blog</a>
+            <Link href="/writeblog" legacyBehavior>
+              <a onClick={() => setIsOpen(false)}>Write Blog</a>
             </Link>
           </li>
           <li>
-            <Link href="/signup"  legacyBehavior>
-              <a onClick={()=>setIsOpen(false)}>Sign Up</a>
+            <Link href="/signup" legacyBehavior>
+              <a onClick={() => setIsOpen(false)}>Sign Up</a>
             </Link>
           </li>
           <li>
-            <Link href={data.token ? '/account' : '/signin'}  legacyBehavior>
-              <a onClick={()=>setIsOpen(false)}>{data.token ? 'Account' : 'Sign In'}</a>
+            <Link href={data.token ? '/account' : '/signin'} legacyBehavior>
+              <a onClick={() => setIsOpen(false)}>{data.token ? 'Account' : 'Sign In'}</a>
             </Link>
           </li>
         </ul>

@@ -41,7 +41,8 @@ const SignUp = () => {
       if (response.ok) {
         setData({
           userId: null,
-          token: null
+          token: null,
+          userName:null
         })
         if (typeof window !== 'undefined') {
           localStorage.clear()

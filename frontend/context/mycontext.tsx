@@ -17,12 +17,12 @@ export interface Blog {
 export interface dataType {
     userId: string | null,
     token: string | null,
-
+    userName: string | null,
 }
 
 export interface MyContextType {
     data: dataType,
-  
+
     setData: React.Dispatch<React.SetStateAction<dataType>>,
 }
 
@@ -43,11 +43,12 @@ export let MyContext = React.createContext<MyContextType>({
 
     data: {
         userId: null,
-        token: null
+        token: null,
+        userName: null
     },
 
     setData: () => { },
-  
+
 
 });
 

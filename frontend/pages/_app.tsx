@@ -11,7 +11,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const [data, setData] = useState<dataType>({
     userId: null,
-    token: null
+    token: null,
+    userName: null
   })
 
 
