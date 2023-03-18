@@ -34,7 +34,7 @@
 <h4 align="center">Deployed On:</h4>
 
 <p align="center">
- <img src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=whit" align="center" alt="Vercel"/>
+ <img src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel"/>
   <img src="https://img.shields.io/badge/Render-FE3B7.svg?style=for-the-badge&logo=render&logoColor=black" alt="Render"/>
 </p>
 
