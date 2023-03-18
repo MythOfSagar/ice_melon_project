@@ -22,6 +22,7 @@ import { Textarea } from "@chakra-ui/react"
 import Select from "../components/Select"
 import Filter from '@/components/Filter';
 import Profile from '@/components/Profile';
+import NoBlogFound from '@/components/NoBlogFound';
 
 
 type staticBlogsProps = {
@@ -248,10 +249,11 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
 
           margin={`80px auto 10px auto`}
         >
+          
           <Profile />
           <>{displayCategory ? <Filter handleCategory={(category) => setCategory(category)}></Filter> : <></>}</>
           <div className={stylesBlogsDiv.AllBlogs}>
-            {stateBlogs.map(((blog, i) => (<div key={i}>
+            {stateBlogs.length===0 ? <NoBlogFound/> : stateBlogs.map(((blog, i) => (<div key={i}>
               <BlogCard category={blog.category}
               content={blog.content}
               date={blog.date}
