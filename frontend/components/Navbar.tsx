@@ -30,7 +30,7 @@ const Navbar: React.FC = () => {
     <nav className={styles.navbar}>
       <div className={styles.container}>
         <div className={styles.logo}>
-          <Link href="/" legacyBehavior>
+          <Link href="/">
             <Image
               className={styles.Logo}
               alt={'Logo'}

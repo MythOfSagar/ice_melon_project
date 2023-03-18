@@ -2,14 +2,16 @@ import React, { useState } from 'react'
 import Select from "../components/Select"
 import Image from 'next/image'
 import styles from '../styles/Filter.module.css'
-
+import { useRouter } from 'next/router'
 
 type Props = {
     handleCategory: (category: string) => void;
+    path:string,
+    allowQuery: boolean
 }
 
-const Filter = ({ handleCategory }: Props) => {
-
+const Filter = ({ handleCategory,path,allowQuery }: Props) => {
+    const router = useRouter()
     const options = [
         { value: 'Select Category' },
         { value: 'Tech' },
@@ -23,6 +25,15 @@ const Filter = ({ handleCategory }: Props) => {
 
     const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 
+        if (event.target.value === 'Select Category' && allowQuery) {
+            router.push(path)
+        } else if(allowQuery) {
+            router.push({
+                pathname: path,
+                query: { category: event.target.value },
+            });
+
+        }
         setCategory(event.target.value)
         handleCategory(event.target.value)
 

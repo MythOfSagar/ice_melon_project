@@ -17,12 +17,13 @@ import {
 
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons'
 import stylesBlogsDiv from '../styles/Home.module.css'
-
+import styles from '../styles/WriteBlog.module.css'
 import { Textarea } from "@chakra-ui/react"
 import Select from "../components/Select"
 import Filter from '@/components/Filter';
 import Profile from '@/components/Profile';
 import NoBlogFound from '@/components/NoBlogFound';
+
 
 
 type staticBlogsProps = {
@@ -172,11 +173,17 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
           return
         }
       })
-  }, [data,staticBlogs])
+  }, [data, staticBlogs])
+
+
+
+ 
 
   useEffect(() => {
     if (category !== 'Select Category') {
-      setStateBlogs(staticBlogs.filter((blog: Blog) => blog.category === category && blog.creator === data.userId))
+      setStateBlogs(staticBlogs.filter((blog: Blog) =>
+        blog.category === category &&
+        blog.creator === data.userId))
 
     } else {
       setStateBlogs(staticBlogs.filter((blog: Blog) => blog.creator === data.userId))
@@ -200,19 +207,26 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
             finalFocusRef={finalRef}
             isOpen={isOpen}
             onClose={onClose}
+        
+            size={'3xl'}
           >
-            <ModalOverlay />
-            <ModalContent>
+            <ModalOverlay
+            bg='blackAlpha.300'
+            backdropFilter='blur(10px) hue-rotate(90deg)'
+             />
+            <ModalContent border={'2px solid red'} >
               <ModalHeader>Edit Your Blog</ModalHeader>
               <ModalCloseButton />
-              <ModalBody pb={6}>
+              <ModalBody pb={6}  >
                 <div className="form">
                   <form method="post"
                     onSubmit={handleSubmit}
-                    style={{ width: 'fit-content', display: 'flex', flexDirection: 'column' }}>
+                    style={{width:'100%', margin:'auto'}}
+                    className={styles.Form}>
                     <label>Title:</label>
                     <input
                       value={currentBlog.title}
+                      className={styles.Input}
                       onChange={handleChange}
                       type="text"
                       title="title" />
@@ -249,19 +263,22 @@ export default function Account({ staticBlogs }: staticBlogsProps) {
 
           margin={`80px auto 10px auto`}
         >
-          
+
           <Profile />
-          <>{displayCategory ? <Filter handleCategory={(category) => setCategory(category)}></Filter> : <></>}</>
+          <>{displayCategory ? <Filter
+           allowQuery={false}
+            path='/account'
+            handleCategory={(category) => setCategory(category)}></Filter> : <></>}</>
           <div className={stylesBlogsDiv.AllBlogs}>
-            {stateBlogs.length===0 ? <NoBlogFound/> : stateBlogs.map(((blog, i) => (<div key={i}>
+            {stateBlogs.length === 0 ? <NoBlogFound category={category} /> : stateBlogs.map(((blog, i) => (<div key={i}>
               <BlogCard category={blog.category}
-              content={blog.content}
-              date={blog.date}
-              title={blog.title}
-              username={blog.userName}
-              key={i}
-              _id={blog._id}
-            ></BlogCard>
+                content={blog.content}
+                date={blog.date}
+                title={blog.title}
+                username={blog.userName}
+                key={i}
+                _id={blog._id}
+              ></BlogCard>
               <Box
                 display={'flex'}
                 gap={7}
