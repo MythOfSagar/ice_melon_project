@@ -1,31 +1,44 @@
-# Ice Melon
-Ice Melon Blogging website has multi-user features with CRUD functionalities.
-<br><br>
-<h3 align="left">TechStacks:</h3>
-<div align='left' style="display: flex;" >
-    <img src="https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white" />
+<h1 align="center">Ice Melon</h1>
+
+<h3 align="center">Ice Melon Blogging website has multi-user features with CRUD functionalities.</h3>
+
+<br />
+
+
+<h2 align="center">🖥️ Tech Stack</h2>
+
+
+<h4 align="center">Frontend:</h4>
+
+<p align="center">
+   <img src="https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white" />
     <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" />
     <img src="https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white" />
-  </div><br />
-  <div align='left' style="display: flex;" >
-    <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" />
-    <img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge" />
-    <img src="https://img.shields.io/badge/MongoDB-2e542d?style=for-the-badge&logo=mongodb&logoColor=white" />
-    <img src="https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens" />
-  </div><br />
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="html5" />
+</p>
 
 
-<blockquote>Frontend Deoployed on</blockquote>
+<h4 align="center">Backend:</h4>
 
-<a href="https://ice-melon.vercel.app" target='_blank'>
-<img src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel"  />
-</a>
-<br>
+<p align="center">
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="nodejs" />
+  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="expressjs" />
+  <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" alt="mongodb" />
+<img src="https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens" />
+</p>
 
-<blockquote>Backend Deoployed on</blockquote>
 
-<img src="https://img.shields.io/badge/Render-FE3B7.svg?style=for-the-badge&logo=render&logoColor=black" alt="Render"/>
-<br>
+
+
+
+<h4 align="center">Deployed On:</h4>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white" alt="vercel" />
+  <img src="https://img.shields.io/badge/Render-FE3B7.svg?style=for-the-badge&logo=render&logoColor=black" alt="Render"/>
+</p>
+
+<h3 align="center"><a href="https://ice-melon.vercel.app"><strong>See live preview »</strong></a></h3>
 
 # Features
 - Signup & Signin.
