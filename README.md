@@ -42,6 +42,7 @@
 
 # Features
 - Signup & Signin.
+- Admin Panel.
 - Blogs are filtered by their category.
 - Authenticated user can write a Blog.
 - Authenticated user can edit and delete their own Blog.
