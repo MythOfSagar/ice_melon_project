@@ -1,10 +1,10 @@
 import React from 'react'
 
-type NoBlogFoundProps = {category: string}; 
 
-const NoBlogFound = ({category}:NoBlogFoundProps) => {
+
+const NoBlogFound = () => {
   return (
-    <div>No Blog Found of {category} Category</div>
+    <div>No Blog Found</div>
   )
 }
 

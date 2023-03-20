@@ -62,7 +62,8 @@ const Navbar: React.FC = () => {
           </li>
           <li>
             <Link href={data.token ? '/account' : '/signin'} legacyBehavior>
-              <a onClick={() => setIsOpen(false)}>{data.token ? 'Account' : 'Sign In'}</a>
+              <a onClick={() => setIsOpen(false)}>
+                {data.userName==='adminIceMelon' ? 'Admin' : data.token ? 'Account' : 'Sign In'}</a>
             </Link>
           </li>
         </ul>

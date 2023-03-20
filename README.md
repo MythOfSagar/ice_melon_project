@@ -66,10 +66,15 @@
     border="0" />
 <br>
 
-
 <blockquote>SignIn Page</blockquote>
 <br>
 <img src="https://i.ibb.co/p3c1G88/ICEMELON.png" alt="Log In"
+    border="0" />
+<br>
+
+<blockquote>Admin Page</blockquote>
+<br>
+<img src="https://i.ibb.co/Jj9DS57/admin-Ice-Melon.png" alt="Admin"
     border="0" />
 <br>
 

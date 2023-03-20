@@ -46,7 +46,7 @@ const SignIn = () => {
     }).then(async (response) => {
       if (response.ok) {
         const details = await response.json()
-        console.log(details)
+       
         localStorage.setItem("iceMelonUser", JSON.stringify(details))
         setData(details)
         toast({
@@ -58,6 +58,7 @@ const SignIn = () => {
         })
         setLoading(false)
         router.push('/account')
+      
       } else if (response.status === 401) {
         toast({
           title: `Wrong Password`,

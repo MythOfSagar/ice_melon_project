@@ -4,7 +4,11 @@ import { useRouter } from "next/router";
 import { useContext } from "react";
 import styles from '../styles/Profile.module.css'
 
-const Profile = () => {
+type ProfileProps={
+  userName:String
+}
+
+const Profile = ({userName}:ProfileProps) => {
 
   const router = useRouter();
   const { setData, data } = useContext<MyContextType>(MyContext);
@@ -32,7 +36,10 @@ const Profile = () => {
       <div className={styles.profilePhotoContainer}>
         <div className={styles.profilePhotoBorder}>
           <Image
-            src="https://i.ibb.co/Rvg1KvB/Cat-Profile.png"
+            src={data.userName==='adminIceMelon' ? 
+            "https://i.ibb.co/0ySKXVs/admin-Ice-Melon.png" :
+            "https://i.ibb.co/Rvg1KvB/Cat-Profile.png"}
+
             width={300}
             height={300}
             alt="Profile photo"
@@ -40,9 +47,12 @@ const Profile = () => {
         </div>
       </div>
       {/* Buttons */}
-      <h1 className={styles.userName}>{data.userName}</h1>
+      <h1 className={styles.userName}>{userName}</h1>
       <div className={styles.buttonsContainer}>
         <button
+        
+        
+        style={{display:data.userName==='adminIceMelon' ? 'none' : 'block'}}
           onClick={() => router.push('/writeblog')}
           className={styles.followButton}>Write Blog</button>
         <button

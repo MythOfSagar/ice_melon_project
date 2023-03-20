@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import { Icon } from "@chakra-ui/react"
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa"
 import styles from '../styles/Footer.module.css'
